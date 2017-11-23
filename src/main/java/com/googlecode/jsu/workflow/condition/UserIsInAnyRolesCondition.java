@@ -1,6 +1,5 @@
 package com.googlecode.jsu.workflow.condition;
 
-import com.atlassian.crowd.embedded.api.User;
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.security.roles.ProjectRole;
 import com.atlassian.jira.security.roles.ProjectRoleManager;
@@ -9,11 +8,12 @@ import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.jira.workflow.condition.AbstractJiraCondition;
 import com.googlecode.jsu.util.WorkflowUtils;
 import com.opensymphony.module.propertyset.PropertySet;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This Condition validates if the current user is in any of the selected roles.
@@ -59,14 +59,6 @@ public class UserIsInAnyRolesCondition extends AbstractJiraCondition {
         }
 
         return false;
-    }
-    /**
-     * This ist deprecated because Atlassian API is not working with ApplicationUser
-     * As soon as this is working this method can be deleted
-     */
-    @Deprecated
-    private User convertApplicationUserToCrowdEmbeddedUser(ApplicationUser applicationUser){
-        return userManager.getUserObject(applicationUser.getUsername());
     }
 
 

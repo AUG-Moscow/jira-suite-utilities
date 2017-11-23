@@ -2,18 +2,18 @@ package com.googlecode.jsu.workflow.condition;
 
 import com.atlassian.crowd.embedded.api.CrowdService;
 import com.atlassian.crowd.embedded.api.Group;
-import com.atlassian.crowd.embedded.api.User;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.jira.workflow.condition.AbstractJiraCondition;
 import com.googlecode.jsu.util.WorkflowUtils;
 import com.opensymphony.module.propertyset.PropertySet;
 import com.opensymphony.workflow.WorkflowContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Gustavo Martin
@@ -52,7 +52,7 @@ public class UserIsInAnyGroupsCondition extends AbstractJiraCondition {
 
             for (Group group : groupsSelected) {
                 try {
-                    if (crowdService.isUserMemberOfGroup(convertApplicationUserToCrowdEmbeddedUser(userLogged), group)) {
+                    if (crowdService.isUserMemberOfGroup(userLogged.getDirectoryUser(), group)) {
                         return true;
                     }
                 } catch (Exception e) {
@@ -62,14 +62,6 @@ public class UserIsInAnyGroupsCondition extends AbstractJiraCondition {
         }
 
         return false;
-    }
-    /**
-     * This ist deprecated because Atlassian API is not working with ApplicationUser
-     * As soon as this is working this method can be deleted
-     */
-    @Deprecated
-    private User convertApplicationUserToCrowdEmbeddedUser(ApplicationUser applicationUser){
-        return userManager.getUserObject(applicationUser.getUsername());
     }
 
 

@@ -1,19 +1,19 @@
 package com.googlecode.jsu.transitionssummary.issuetabpanel;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import com.atlassian.crowd.embedded.api.User;
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.tabpanels.GenericMessageAction;
 import com.atlassian.jira.plugin.issuetabpanel.IssueAction;
 import com.atlassian.jira.plugin.issuetabpanel.IssueTabPanel;
 import com.atlassian.jira.plugin.issuetabpanel.IssueTabPanelModuleDescriptor;
+import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.util.UserManager;
 import com.atlassian.jira.util.I18nHelper;
 import com.googlecode.jsu.transitionssummary.TransitionSummary;
 import com.googlecode.jsu.transitionssummary.TransitionsManager;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Gustavo Martin
@@ -42,13 +42,13 @@ public class TransitionsSummaryTabPanel implements IssueTabPanel {
      */
     public void init(IssueTabPanelModuleDescriptor descriptor) {
         this.descriptor = descriptor;
-        
+
     }
 
     /* (non-Javadoc)
      * @see com.googlecode.jsu.issuetabpanel.IssueTabPanel#getActions(org.ofbiz.core.entity.GenericValue, com.opensymphony.user.User)
      */
-    public List<com.atlassian.jira.plugin.issuetabpanel.IssueAction> getActions(Issue issue, User remoteUser) {
+    public List<com.atlassian.jira.plugin.issuetabpanel.IssueAction> getActions(Issue issue, ApplicationUser remoteUser) {
         List<IssueAction> retList = new ArrayList<IssueAction>();
         List<TransitionSummary> transitions = transitionsManager.getTransitionSummary(issue);
 
@@ -71,7 +71,7 @@ public class TransitionsSummaryTabPanel implements IssueTabPanel {
     /* (non-Javadoc)
      * @see com.googlecode.jsu.issuetabpanel.IssueTabPanel#showPanel(org.ofbiz.core.entity.GenericValue)
      */
-    public boolean showPanel(Issue issue, User remoteUser) {
+    public boolean showPanel(Issue issue, ApplicationUser remoteUser) {
         return true;
     }
 

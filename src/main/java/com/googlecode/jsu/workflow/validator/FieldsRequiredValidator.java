@@ -121,7 +121,7 @@ public class FieldsRequiredValidator extends GenericValidator {
                 if (checker.checkValues(fieldValue, null)
                         || (fieldValue instanceof Collection && ((Collection) fieldValue).isEmpty())) {
                     I18nHelper i18nh = this.beanFactory.getInstance(
-                            ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser());
+                            ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser());
                     String msg1 = i18nh.getText("fieldsrequired-validator-view.is_required",field.getName());
                     String msg2 = i18nh.getText("fieldsrequired-validator-view.is_required_not_present",field.getName());
                     // Sets Exception message.

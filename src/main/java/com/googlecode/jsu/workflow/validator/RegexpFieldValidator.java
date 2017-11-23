@@ -83,7 +83,7 @@ public class RegexpFieldValidator extends GenericValidator {
 
             if(!result) {
                 I18nHelper i18nh = this.beanFactory.getInstance(
-                        ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser());
+                        ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser());
                 String msg = i18nh.getText("regexpfield-validator-view.not_matching",field.getName(),lastValue,expression);
                 this.setExceptionMessage(
                         field,
