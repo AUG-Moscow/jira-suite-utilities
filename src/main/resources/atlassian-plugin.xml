@@ -314,10 +314,9 @@
         <condition class="com.googlecode.jsu.conditions.UserIsAdminCondition"/>
         <param name="webfragments.keywords">webfragments.keywords.jsu.configuration</param>
     </web-item>
-    <webwork1 key="jsu" name="JSU Actions" class="java.lang.Object">
+    <webwork1 key="jsu" name="JSU Actions">
         <actions>
-            <action name="com.googlecode.jsu.actions.ConfigurationAction" alias="JSUConfiguration"
-                    roles-required="admin">
+            <action name="com.googlecode.jsu.actions.ConfigurationAction" alias="JSUConfiguration" roles-required="admin">
                 <view name="input">templates/jira/actions/view/configuration.vm</view>
             </action>
         </actions>

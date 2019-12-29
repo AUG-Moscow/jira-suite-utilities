@@ -1,22 +1,24 @@
 package com.googlecode.jsu.workflow.condition;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
-
-import com.atlassian.jira.issue.customfields.option.LazyLoadedOption;
-import com.atlassian.jira.issue.status.Status;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.atlassian.jira.issue.Issue;
+import com.atlassian.jira.issue.customfields.option.LazyLoadedOption;
 import com.atlassian.jira.issue.fields.Field;
+import com.atlassian.jira.issue.status.Status;
 import com.atlassian.jira.workflow.condition.AbstractJiraCondition;
 import com.googlecode.jsu.helpers.ComparisonType;
 import com.googlecode.jsu.helpers.ConditionCheckerFactory;
 import com.googlecode.jsu.helpers.ConditionType;
 import com.googlecode.jsu.util.WorkflowUtils;
 import com.opensymphony.module.propertyset.PropertySet;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Map;
 
 /**
  * This condition evaluates if a given field fulfills the condition.

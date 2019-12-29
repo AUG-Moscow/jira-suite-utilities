@@ -48,7 +48,7 @@ extends CalculatedCFType<FormattableDuration, FormattableDuration> {
             }
             lastSummary = summary;
         }
-        duration = lastSummary != null ? (duration += System.currentTimeMillis() - lastSummary.getLastUpdate().getTime()) : (duration += System.currentTimeMillis() - issue.getCreated().getTime());
+        duration = lastSummary != null ? duration + (System.currentTimeMillis() - lastSummary.getLastUpdate().getTime()) : duration + (System.currentTimeMillis() - issue.getCreated().getTime());
         return new FormattableDuration(duration);
     }
 

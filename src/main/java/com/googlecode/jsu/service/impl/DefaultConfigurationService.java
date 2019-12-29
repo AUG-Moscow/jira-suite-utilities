@@ -7,9 +7,8 @@ import com.googlecode.jsu.service.ConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
-public class DefaultConfigurationService
-implements ConfigurationService {
+@Service("configurationService")
+public class DefaultConfigurationService implements ConfigurationService {
     private static final String GOOGLE_MAPS_API_KEY = "jsu.google.maps.api.key";
     private PluginSettingsFactory pluginSettingsFactory;
 
@@ -27,7 +26,7 @@ implements ConfigurationService {
     @Override
     public void saveGoogleMapsApiKey(String googleMapsApiKey) {
         PluginSettings pluginSettings = this.pluginSettingsFactory.createGlobalSettings();
-        pluginSettings.put(GOOGLE_MAPS_API_KEY, (Object)googleMapsApiKey);
+        pluginSettings.put(GOOGLE_MAPS_API_KEY, googleMapsApiKey);
     }
 }
 

@@ -16,8 +16,7 @@ import javax.annotation.Nonnull;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Scanned
-public class LocationSelectCFType
-extends SelectCFType {
+public class LocationSelectCFType extends SelectCFType {
     private final ConfigurationService configurationService;
 
     @Autowired
@@ -28,7 +27,7 @@ extends SelectCFType {
 
     @Nonnull
     public Map<String, Object> getVelocityParameters(Issue issue, CustomField field, FieldLayoutItem fieldLayoutItem) {
-        Map params = super.getVelocityParameters(issue, field, fieldLayoutItem);
+        Map<String, Object> params = super.getVelocityParameters(issue, field, fieldLayoutItem);
         params.put("googleMapsApiKey", this.configurationService.getGoogleMapsApiKey());
         return params;
     }

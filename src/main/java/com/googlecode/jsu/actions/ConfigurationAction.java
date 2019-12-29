@@ -2,12 +2,13 @@ package com.googlecode.jsu.actions;
 
 import com.atlassian.jira.web.action.JiraWebActionSupport;
 import com.atlassian.plugin.spring.scanner.annotation.component.Scanned;
+import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.googlecode.jsu.service.ConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Scanned
-public class ConfigurationAction
-extends JiraWebActionSupport {
+public class ConfigurationAction extends JiraWebActionSupport {
+    @ComponentImport
     private final ConfigurationService configurationService;
     private boolean saved = false;
     private String googleMapsApiKey;

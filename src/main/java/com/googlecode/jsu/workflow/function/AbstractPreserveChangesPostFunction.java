@@ -29,10 +29,8 @@ abstract class AbstractPreserveChangesPostFunction extends AbstractJiraFunctionP
      *
      * @throws WorkflowException
      */
-    protected abstract void executeFunction(
-            Map<String, Object> transientVars, Map<String, String> args,
-            PropertySet ps, IssueChangeHolder holder
-    ) throws WorkflowException;
+    protected abstract void executeFunction(Map<String, Object> transientVars, Map<String, String> args,
+                                            PropertySet ps, IssueChangeHolder holder) throws WorkflowException;
 
     @SuppressWarnings("unchecked")
     public final void execute(Map transientVars, Map args, PropertySet ps) throws WorkflowException {
@@ -41,12 +39,12 @@ abstract class AbstractPreserveChangesPostFunction extends AbstractJiraFunctionP
         if (log.isDebugEnabled()) {
             log.debug(
                     "Executing function with [transientVars=" +
-                    transientVars +
-                    ";args=" +
-                    args +
-                    ";ps=" +
-                    ps +
-                    "]"
+                            transientVars +
+                            ";args=" +
+                            args +
+                            ";ps=" +
+                            ps +
+                            "]"
             );
         }
 

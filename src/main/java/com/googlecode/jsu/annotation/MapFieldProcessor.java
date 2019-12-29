@@ -54,7 +54,7 @@ public class MapFieldProcessor extends AbstractVisitor {
         String result = null;
 
         try {
-            Method valueMethod = annotation.getClass().getDeclaredMethod("value", new Class[] {});
+            Method valueMethod = annotation.getClass().getDeclaredMethod("value");
 
             result = (String) valueMethod.invoke(annotation, new Object[] {});
         } catch (SecurityException |

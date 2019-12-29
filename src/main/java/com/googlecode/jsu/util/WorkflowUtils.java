@@ -920,7 +920,7 @@ public class WorkflowUtils {
 
     private Collection<ProjectComponent> convertValueToComponents(Issue issue, Object value) {
         if (value == null) {
-            return Collections.<ProjectComponent>emptySet();
+            return Collections.emptySet();
         } else {
             return convertToTargetProjectComponent(issue.getProjectObject(), value);
         }

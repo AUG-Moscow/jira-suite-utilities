@@ -49,18 +49,16 @@ public abstract class GenericValidator implements Validator {
     protected abstract void validate() throws InvalidInputException, WorkflowException;
 
     @SuppressWarnings("unchecked")
-    public final void validate(
-            Map transientVars, Map args, PropertySet ps
-    ) throws InvalidInputException, WorkflowException {
+    public final void validate(Map transientVars, Map args, PropertySet ps) throws InvalidInputException, WorkflowException {
         if (LOG.isDebugEnabled()) {
             LOG.debug(
                     "Validation request: [transientVars=" +
-                    transientVars +
-                    ";args=" +
-                    args +
-                    ";property=" +
-                    ps +
-                    "]"
+                            transientVars +
+                            ";args=" +
+                            args +
+                            ";property=" +
+                            ps +
+                            "]"
             );
         }
 
@@ -79,6 +77,7 @@ public abstract class GenericValidator implements Validator {
 
     /**
      * Initialize object with maps of parameters.
+     *
      * @param vars
      * @param arguments
      */
@@ -131,7 +130,7 @@ public abstract class GenericValidator implements Validator {
                 }
             } else {
                 //some fields can not be shown at all on a screen, but validated anyway
-                if(IssueFieldConstants.AGGREGATE_TIME_SPENT.equals(field.getId())) {
+                if (IssueFieldConstants.AGGREGATE_TIME_SPENT.equals(field.getId())) {
                     this.errorBuilder.addError(messageIfOnScreen);
                 } else {
                     this.errorBuilder.addError(messageIfHidden);

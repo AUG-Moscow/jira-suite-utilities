@@ -7,7 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.googlecode</groupId>
     <artifactId>jira-suite-utilities</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>2.0.0.1-SNAPSHOT</version>
 
     <organization>
         <name>beecom AG</name>
@@ -167,13 +167,15 @@
                     <!-- See here for an explanation of default instructions: -->
                     <!-- https://developer.atlassian.com/docs/advanced-topics/configuration-of-instructions-in-atlassian-plugins -->
                     <instructions>
-                        <!-- Add package to export here -->
                         <Export-Package/>
                         <!-- Add package import here -->
-                        <Import-Package>com.atlassian.jira.security,
+                        <Import-Package>
+                            com.atlassian.jira.security,
                             org.springframework.osgi.*;resolution:="optional",
                             org.eclipse.gemini.blueprint.*;resolution:="optional",
-                            *
+                            com.atlassian.jira.issue.fields.config.manager;resolution:="optional",
+                            com.atlassian.jira.plugin.webfragment.conditions.UserIsAdminCondition;resolution:="optional",
+                            *;version="0";resolution:=optional
                         </Import-Package>
 
                         <!-- Ensure plugin is spring powered -->

@@ -15,9 +15,8 @@ import com.opensymphony.workflow.loader.ConditionDescriptor;
 
 /**
  * @author Gustavo Martin.
- *
+ * <p>
  * This class defines the parameters available for User Is In Any Group Condition.
- *
  */
 public class WorkflowUserIsInAnyGroupsConditionPluginFactory extends
         AbstractWorkflowPluginFactory implements WorkflowPluginConditionFactory {
@@ -41,10 +40,7 @@ public class WorkflowUserIsInAnyGroupsConditionPluginFactory extends
     /* (non-Javadoc)
      * @see com.googlecode.jsu.workflow.AbstractWorkflowPluginFactory#getVelocityParamsForEdit(java.util.Map, com.opensymphony.workflow.loader.AbstractDescriptor)
      */
-    protected void getVelocityParamsForEdit(
-            Map<String, Object> velocityParams,
-            AbstractDescriptor descriptor
-    ) {
+    protected void getVelocityParamsForEdit(Map<String, Object> velocityParams, AbstractDescriptor descriptor) {
 
         getVelocityParamsForInput(velocityParams);
 
@@ -53,15 +49,15 @@ public class WorkflowUserIsInAnyGroupsConditionPluginFactory extends
 
         velocityParams.remove("val-groupsList");
 
-        String strGroupsSelected = (String)args.get("hidGroupsList");
+        String strGroupsSelected = (String) args.get("hidGroupsList");
         Collection<Group> groupsSelected = workflowUtils.getGroups(strGroupsSelected, WorkflowUtils.SPLITTER);
 
         Collection<Group> groups = groupManager.getAllGroups();
 
         Collection<Group> availableGroups = new ArrayList<>();
         //do not use remove or removeAll, does not work in OD for whatever reason
-        for(Group g:groups) {
-            if(!groupsSelected.contains(g)) {
+        for (Group g : groups) {
+            if (!groupsSelected.contains(g)) {
                 availableGroups.add(g);
             }
         }
@@ -73,14 +69,11 @@ public class WorkflowUserIsInAnyGroupsConditionPluginFactory extends
     /* (non-Javadoc)
      * @see com.googlecode.jsu.workflow.AbstractWorkflowPluginFactory#getVelocityParamsForView(java.util.Map, com.opensymphony.workflow.loader.AbstractDescriptor)
      */
-    protected void getVelocityParamsForView(
-            Map<String, Object> velocityParams,
-            AbstractDescriptor descriptor
-    ) {
+    protected void getVelocityParamsForView(Map<String, Object> velocityParams, AbstractDescriptor descriptor) {
         ConditionDescriptor conditionDescriptor = (ConditionDescriptor) descriptor;
         Map args = conditionDescriptor.getArgs();
 
-        String strGroupsSelected = (String)args.get("hidGroupsList");
+        String strGroupsSelected = (String) args.get("hidGroupsList");
         Collection groupsSelected = workflowUtils.getGroups(strGroupsSelected, WorkflowUtils.SPLITTER);
 
         velocityParams.put("val-groupsListSelected", groupsSelected);
@@ -96,7 +89,7 @@ public class WorkflowUserIsInAnyGroupsConditionPluginFactory extends
             String strGroupsSelected = extractSingleParam(conditionParams, "hidGroupsList");
 
             params.put("hidGroupsList", strGroupsSelected);
-        } catch(IllegalArgumentException iae) {
+        } catch (IllegalArgumentException iae) {
             // Aggregate so that Transitions can be added.
         }
 

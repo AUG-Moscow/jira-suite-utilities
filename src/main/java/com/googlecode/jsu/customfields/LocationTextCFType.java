@@ -39,7 +39,7 @@ extends RenderableTextCFType {
 
     @Nonnull
     public Map<String, Object> getVelocityParameters(Issue issue, CustomField field, FieldLayoutItem fieldLayoutItem) {
-        Map params = super.getVelocityParameters(issue, field, fieldLayoutItem);
+        Map<String, Object> params = super.getVelocityParameters(issue, field, fieldLayoutItem);
         params.put("googleMapsApiKey", this.configurationService.getGoogleMapsApiKey());
         return params;
     }
