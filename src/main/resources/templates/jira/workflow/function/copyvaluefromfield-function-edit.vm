@@ -3,15 +3,15 @@
         <span class="label">$i18n.getText("copyvaluefromfield-function.source.label"):</span>
     </td>
     <td bgcolor="#ffffff" nowrap>
-				        <select id="sourceFieldsList" name="sourceFieldsList">
-	            #foreach ($val in ${val-sourceFieldsList})
-	                <option value="${val.id}"
-	                #if(${val.id.equals($val-sourceFieldSelected.id)})
-	                    SELECTED
-	                #end
+        <select id="sourceFieldsList" name="sourceFieldsList">
+            #foreach ($val in ${val-sourceFieldsList})
+                <option value="${val.id}"
+                    #if(${val.id.equals($val-sourceFieldSelected.id)})
+                        SELECTED
+                    #end
                 >$textutils.htmlEncode(${val.name})</option>
-	            #end
-	        </select>
+            #end
+        </select>
         <br><font size="1">$i18n.getText("copyvaluefromfield-function.source.description")</font>
     </td>
 </tr>
@@ -20,15 +20,15 @@
         <span class="label">$i18n.getText("copyvaluefromfield-function.destination.label"):</span>
     </td>
     <td bgcolor="#ffffff" nowrap>
-				        <select id="destinationFieldsList" name="destinationFieldsList">
-	            #foreach ($val in ${val-destinationFieldsList})
+        <select id="destinationFieldsList" name="destinationFieldsList">
+            #foreach ($val in ${val-destinationFieldsList})
                 <option value="${val.id}"
-	                #if(${val.id.equals($val-destinationFieldSelected.id)})
-	                    SELECTED
-	                #end
+                    #if(${val.id.equals($val-destinationFieldSelected.id)})
+                        SELECTED
+                    #end
                 >$textutils.htmlEncode(${val.name})</option>
             #end
-	        </select>
+        </select>
         <br><font size="1">$i18n.getText("copyvaluefromfield-function.destination.description")</font>
     </td>
 </tr>
@@ -39,16 +39,17 @@
             #if(${val-copyType.equals('same')})
                checked="checked"
             #end
-            >$i18n.getText("copyvaluefromfield-function.optionsame.label")<br>
+        >$i18n.getText("copyvaluefromfield-function.optionsame.label")<br>
         <input type="radio" id="copyType" name="copyType" value="parent"
             #if(${val-copyType.equals('parent')})
                checked="checked"
             #end
-            >$i18n.getText("copyvaluefromfield-function.optionparent.label")<br>
+        >$i18n.getText("copyvaluefromfield-function.optionparent.label")<br>
     </td>
 </tr>
 <tr bgcolor="#ffffff">
     <td colspan="2">
-        <div style="width: 60%;" class="infoBox centred">$i18n.getText("copyvaluefromfield-function.option.description")</div>
+        <div style="width: 60%;" class="infoBox centred">$i18n.getText(
+            "copyvaluefromfield-function.option.description")</div>
     </td>
 </tr>

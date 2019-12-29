@@ -1,5 +1,5 @@
 #if (${val-errorMessage})
-	<div style="background: red; color: white">${val-errorMessage}</div>
+<div style="background: red; color: white">${val-errorMessage}</div>
 #else
     #if (${val-fieldSelected} && ${val-conditionSelected} && ${val-comparisonTypeSelected})
         #if (!${val-fieldValue.equals("")})
@@ -7,7 +7,10 @@
         #else
             #set($val = $i18n.getText("fieldvalue-condition-view.null.text"))
         #end
-        $i18n.getText("fieldvalue-condition-view.condition.text","<b>$textutils.htmlEncode(${val-fieldSelected.name})</b>","<b>$i18n.getText(${val-conditionSelected.getDisplayTextKey()})</b>","<b>$val</b>","<b>$i18n.getText(${val-comparisonTypeSelected.valueKey})</b>")
+        $i18n.getText(
+            "fieldvalue-condition-view.condition.text","<b>$textutils.htmlEncode(${val-fieldSelected.name})</b>",
+            "<b>$i18n.getText(${val-conditionSelected.getDisplayTextKey()})</b>","<b>$val</b>",
+            "<b>$i18n.getText(${val-comparisonTypeSelected.valueKey})</b>")
     #else
         $i18n.getText("fieldvalue-condition-view.wrong_selection")
     #end

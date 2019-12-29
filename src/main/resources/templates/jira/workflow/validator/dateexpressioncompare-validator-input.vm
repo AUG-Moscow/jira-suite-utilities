@@ -5,7 +5,7 @@
     <td bgcolor="#ffffff" nowrap>
         <select id="dateFieldsList" name="dateFieldsList">
             #foreach ($val in ${val-dateFieldsList})
-	                <option value="${val.id}">$textutils.htmlEncode(${val.name})</option>
+                <option value="${val.id}">$textutils.htmlEncode(${val.name})</option>
             #end
         </select>
         <br><font size="1">$i18n.getText("dateexpressioncompare-validator.date.description")</font>
@@ -18,7 +18,7 @@
     <td bgcolor="#ffffff" nowrap>
         <select id="conditionList" name="conditionList">
             #foreach ($val in ${val-conditionList})
-	                <option value="${val.id}">$textutils.htmlEncode(${val.value})</option>
+                <option value="${val.id}">$textutils.htmlEncode(${val.value})</option>
             #end
         </select>
         <br><font size="1">$i18n.getText("datecompare-validator.condition.description")</font>
@@ -40,7 +40,7 @@
     <td bgcolor="#ffffff" nowrap>
         <select id="includeTimeList" name="includeTimeList">
             #foreach ($val in ${val-includeTime})
-	                <option value="${val.id}">$textutils.htmlEncode(${val.value})</option>
+                <option value="${val.id}">$textutils.htmlEncode(${val.value})</option>
             #end
         </select>
         <br><font size="1">$i18n.getText("datecompare-validator.timepart.description")</font>
@@ -48,6 +48,7 @@
 </tr>
 <tr bgcolor="#ffffff">
     <td colspan="2">
-        <div style="width: 60%;" class="infoBox centred">$i18n.getText("dateexpressioncompare-validator.infobox.text")</div>
+        <div style="width: 60%;" class="infoBox centred">$i18n.getText(
+            "dateexpressioncompare-validator.infobox.text")</div>
     </td>
 </tr>

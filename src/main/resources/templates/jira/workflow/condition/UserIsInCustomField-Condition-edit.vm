@@ -1,32 +1,32 @@
 <tr bgcolor="#ffffff">
-  <td align="right" valign="top" bgcolor="#fffff0">
-    <span class="label">$i18n.getText("userisincustomfield-condition-edit.user.label"):</span>
-  </td>
-  <td bgcolor="#ffffff" nowrap>
-    <select id="allowUserInField" name="allowUserInField">
-	  <option value="true"
-	  #if($!{allowUserInField-selected}) selected #end
-	  >$i18n.getText("userisincustomfield-condition-edit.in_field.label")</option>
-	  <option value="false"
-	  #if(!$!{allowUserInField-selected}) selected #end
-	  >$i18n.getText("userisincustomfield-condition-edit.not_in_field.label")</option>
-    </select>
-	<br><font size="1">$i18n.getText("userisincustomfield-condition-edit.user.description")</font>
-  </td>
+    <td align="right" valign="top" bgcolor="#fffff0">
+        <span class="label">$i18n.getText("userisincustomfield-condition-edit.user.label"):</span>
+    </td>
+    <td bgcolor="#ffffff" nowrap>
+        <select id="allowUserInField" name="allowUserInField">
+            <option value="true"
+                #if($!{allowUserInField-selected}) selected #end
+            >$i18n.getText("userisincustomfield-condition-edit.in_field.label")</option>
+            <option value="false"
+                #if(!$!{allowUserInField-selected}) selected #end
+            >$i18n.getText("userisincustomfield-condition-edit.not_in_field.label")</option>
+        </select>
+        <br><font size="1">$i18n.getText("userisincustomfield-condition-edit.user.description")</font>
+    </td>
 </tr>
 <tr bgcolor="#ffffff">
-  <td align="right" valign="top" bgcolor="#fffff0">
-    <span class="label">$i18n.getText("userisincustomfield-condition-edit.field.label"):</span>
-  </td>
-  <td bgcolor="#ffffff" nowrap>
-	<select id="fieldsList" name="fieldsList">
-	#foreach ($val in ${val-fieldsList})
-      <option value="${val.id}"
-	  #if($!{val.id.equals($val-fieldSelected.id)}) SELECTED #end
-      >$textutils.htmlEncode(${val.name})</option>
-    #end
-	</select>
-    <br><font size="1">$i18n.getText("userisincustomfield-condition-edit.field.description")</font>
-  </td>
+    <td align="right" valign="top" bgcolor="#fffff0">
+        <span class="label">$i18n.getText("userisincustomfield-condition-edit.field.label"):</span>
+    </td>
+    <td bgcolor="#ffffff" nowrap>
+        <select id="fieldsList" name="fieldsList">
+            #foreach ($val in ${val-fieldsList})
+                <option value="${val.id}"
+                    #if($!{val.id.equals($val-fieldSelected.id)}) SELECTED #end
+                >$textutils.htmlEncode(${val.name})</option>
+            #end
+        </select>
+        <br><font size="1">$i18n.getText("userisincustomfield-condition-edit.field.description")</font>
+    </td>
 </tr>
 

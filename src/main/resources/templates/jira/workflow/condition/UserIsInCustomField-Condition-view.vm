@@ -1,12 +1,14 @@
 #if(${val-errorMessage})
-    <div style="background: red; color: white">${val-errorMessage}</div>
+<div style="background: red; color: white">${val-errorMessage}</div>
 #else
     #if(${val-fieldSelected})
         #if (!${allowUserInField-selected})
-            $i18n.getText("userisincustomfield-condition-view.condition_text_must_not","<b>$textutils.htmlEncode(${val-fieldSelected.name})</b>")
-         #else
-             $i18n.getText("userisincustomfield-condition-view.condition_text_must","<b>$textutils.htmlEncode(${val-fieldSelected.name})</b>")
-         #end
+            $i18n.getText("userisincustomfield-condition-view.condition_text_must_not",
+                "<b>$textutils.htmlEncode(${val-fieldSelected.name})</b>")
+        #else
+            $i18n.getText("userisincustomfield-condition-view.condition_text_must",
+                "<b>$textutils.htmlEncode(${val-fieldSelected.name})</b>")
+        #end
     #else
         $i18n.getText("userisincustomfield-condition-view.wrong_selection")
     #end

@@ -3,15 +3,15 @@
         <span class="label">$i18n.getText("clearfieldvalue-function-edit.field.label"):</span>
     </td>
     <td bgcolor="#ffffff" nowrap>
-		<select id="field" name="field">
-	    	#foreach ($val in $fieldList)
-	        	<option value="${val.id}"
-	                #if(${val.id.equals($selectedField.id)})
-	                    SELECTED
-	                #end
+        <select id="field" name="field">
+            #foreach ($val in $fieldList)
+                <option value="${val.id}"
+                    #if(${val.id.equals($selectedField.id)})
+                        SELECTED
+                    #end
                 >$textutils.htmlEncode(${val.name})</option>
-	        #end
-	        </select>
+            #end
+        </select>
         <br><font size="1">$i18n.getText("clearfieldvalue-function-edit.field.description")</font>
     </td>
 </tr>

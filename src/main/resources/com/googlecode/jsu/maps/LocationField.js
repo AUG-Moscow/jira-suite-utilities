@@ -1,4 +1,4 @@
-(function($) {
+(function ($) {
 
     var global = window,
         JSONP_CALLBACK_NAME = "onJSUGMapsLoad",
@@ -30,7 +30,7 @@
             //Google Maps is not present nor being requested -> Add the callback to the queue and request it
             googleMapsRequested = true;
             mapsCallbacks.push(callback);
-            google.load("maps","3", {other_params:'sensor=false', callback: runMapsCallbacks} );
+            google.load("maps", "3", {other_params: 'sensor=false', callback: runMapsCallbacks});
         }
     }
 
@@ -47,11 +47,11 @@
         } else {
             // Google Loader is not present nor requested -> Request it and add the callback to the maps queue
             googleLoaderRequested = true;
-            global[JSONP_CALLBACK_NAME] = function() {
+            global[JSONP_CALLBACK_NAME] = function () {
                 loadMapAndRunCallbacks(callback);
             };
             var script = document.createElement("script");
-            script.src = "https://www.google.com/jsapi?callback="+JSONP_CALLBACK_NAME;
+            script.src = "https://www.google.com/jsapi?callback=" + JSONP_CALLBACK_NAME;
             script.type = "text/javascript";
             $("body").append(script);
         }
@@ -59,7 +59,7 @@
 
 
     function loadAndDisplayLocationOnMap(location, callback) {
-        runWithGoogleMaps(function() {
+        runWithGoogleMaps(function () {
             new google.maps.Geocoder().geocode({
                 address: location
             }, callback);
@@ -93,12 +93,12 @@
             mapDiv = jsuMapField.find(".jsuMap");
 
         var dirNames = location.split("=>");
-        if(dirNames.length==2) {
+        if (dirNames.length == 2) {
             location = dirNames[0].trim();
             destination = dirNames[1].trim();
         }
 
-        loadAndDisplayLocationOnMap(location, function(results, status) {
+        loadAndDisplayLocationOnMap(location, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 jsuMapField.addClass("open");
                 var map = new google.maps.Map(mapDiv.get(0), {
@@ -109,8 +109,8 @@
 
                 /* did we get GPS coordinates as location, then point marker to it instead of geocoded location */
                 var coords = location.split(",");
-                if(coords.length==2 && isNumber(coords[0]) && isNumber(coords[1])) {
-                    var latlng = new google.maps.LatLng(coords[0],coords[1]);
+                if (coords.length == 2 && isNumber(coords[0]) && isNumber(coords[1])) {
+                    var latlng = new google.maps.LatLng(coords[0], coords[1]);
                     new google.maps.Marker({
                         position: latlng,
                         map: map,
@@ -124,18 +124,18 @@
                     });
                 }
 
-                if(!isEmpty(destination)) {
+                if (!isEmpty(destination)) {
                     var directionsDisplay = new google.maps.DirectionsRenderer();
                     var directionsService = new google.maps.DirectionsService();
 
                     directionsDisplay.setMap(map);
 
                     var request = {
-                        origin:location,
-                        destination:destination,
+                        origin: location,
+                        destination: destination,
                         travelMode: google.maps.TravelMode.DRIVING
                     };
-                    directionsService.route(request, function(response, status) {
+                    directionsService.route(request, function (response, status) {
                         if (status == google.maps.DirectionsStatus.OK) {
                             directionsDisplay.setDirections(response);
                         }
@@ -151,9 +151,9 @@
         if (reason === JIRA.CONTENT_ADDED_REASON.panelRefreshed || reason === JIRA.CONTENT_ADDED_REASON.pageLoad) {
             var jsuMapFields = $(".jsuLocation.ready", context);
             jsuMapFields.removeClass("ready");
-            jsuMapFields.each(function(i, jsuMapField) {
+            jsuMapFields.each(function (i, jsuMapField) {
                 jsuMapField = $(jsuMapField);
-                jsuMapField.find("> a").click(function(e) {
+                jsuMapField.find("> a").click(function (e) {
                     e.preventDefault();
                     toggleMap(jsuMapField);
                 })
@@ -161,7 +161,7 @@
         }
     });
 
-    JIRA.bind(JIRA.Events.INLINE_EDIT_STARTED, function() {
+    JIRA.bind(JIRA.Events.INLINE_EDIT_STARTED, function () {
         JIRA.Issues.InlineEdit.BlurTriggerMapping.custom.locationselect = JIRA.Issues.InlineEdit.BlurTriggers.Default;
         JIRA.Issues.InlineEdit.BlurTriggerMapping.custom.locationtextfield = JIRA.Issues.InlineEdit.BlurTriggers.Default;
         JIRA.Issues.InlineEdit.BlurTriggerMapping.custom.directionsfield = JIRA.Issues.InlineEdit.BlurTriggers.Default;

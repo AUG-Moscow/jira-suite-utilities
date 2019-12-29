@@ -9,10 +9,10 @@
                     #if(${val.id.equals($val-fieldSelected.id)})
                         SELECTED
                     #end
-                        >$textutils.htmlEncode(${val.name})</option>
+                >$textutils.htmlEncode(${val.name})</option>
             #end
         </select>
-        <br><span style="font-size: 1">$i18n.getText("regexpfield-validator-edit.validate_field.description")</span>
+        <br><span style="font-size: xx-small">$i18n.getText("regexpfield-validator-edit.validate_field.description")</span>
     </td>
 </tr>
 <tr bgcolor="#ffffff">
@@ -21,7 +21,7 @@
     </td>
     <td bgcolor="#ffffff" nowrap>
         <input type="text" id="expression" name="expression" value="$textutils.htmlEncode($!{val-expressionSelected})"/>
-        <br><span style="font-size: 1">$i18n.getText("regexpfield-validator-edit.regexp.description")</span>
+        <br><span style="font-size: xx-small">$i18n.getText("regexpfield-validator-edit.regexp.description")</span>
     </td>
 </tr>
 <tr bgcolor="#ffffff">

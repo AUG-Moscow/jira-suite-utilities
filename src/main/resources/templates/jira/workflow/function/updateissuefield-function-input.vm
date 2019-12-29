@@ -1,24 +1,19 @@
 <script language="JavaScript" type="text/javascript">
-<!--
+    <!--
     var fields = new Array(${fields.size()});
-    #foreach ($field in ${fields})
-    fields[${velocityCount} - 1] = '$field.id';
-    #end
+        #foreach ($field in ${fields})
+        fields[${velocityCount} -1] = '$field.id';
+        #end
 
-    function retoreFieldValue()
-    {
+    function retoreFieldValue() {
         var selectedValue = document.getElementById("updateFieldId").value;
-        
-        for (i=0 ; i < fields.length ; i++)
-        {
-            if (fields[i] == selectedValue)
-            {
+
+        for (i = 0; i < fields.length; i++) {
+            if (fields[i] == selectedValue) {
                 document.getElementById(fields[i] + "_container").style.display = '';
                 if (document.getElementById(fields[i]) == null) alert(fields[i]);
                 document.getElementById(fields[i]).name = 'fieldValue';
-            }
-            else
-            {
+            } else {
                 document.getElementById(fields[i] + "_container").style.display = 'none';
                 document.getElementById(fields[i]).name = 'dummyfield';
             }
@@ -26,7 +21,7 @@
 
     }
 
-//-->
+    //-->
 </script>
 
 <tr bgcolor="#ffffff">
@@ -35,15 +30,15 @@
     </td>
     <td bgcolor="#ffffff" nowrap>
         <select name="fieldId" id="updateFieldId" onchange="retoreFieldValue();">
-        #foreach ($field in ${fields})
-            <option value="$field.id"
-            #if ($field.id.equals($fieldId))
-                SELECTED
+            #foreach ($field in ${fields})
+                <option value="$field.id"
+                    #if ($field.id.equals($fieldId))
+                        SELECTED
+                    #end
+                >$textutils.htmlEncode(${descriptor.getText($field.nameKey)})</option>
             #end
-            >$textutils.htmlEncode(${descriptor.getText($field.nameKey)})</option>
-        #end
         </select>
-        <br /><span class="subText">$i18n.getText("updateissuefield-function-input.field.description")</span>
+        <br/><span class="subText">$i18n.getText("updateissuefield-function-input.field.description")</span>
     </td>
 </tr>
 
@@ -51,12 +46,12 @@
     <td class="fieldLabelArea" bgcolor="#fffff0">
         $i18n.getText("updateissuefield-function-input.value.label"):
     </td>
-        #foreach ($field in ${fields})
-            <td nowrap id="${field.id}_container" bgcolor="#ffffff">
-                <textarea rows="10" cols="35" type="text" name="${field.id}" id="${field.id}">$!{fieldValue}</textarea>
-                <br /><span class="subText">$i18n.getText("updateissuefield-function-input.value.description")</span>
-            </td>
-        #end
+    #foreach ($field in ${fields})
+        <td nowrap id="${field.id}_container" bgcolor="#ffffff">
+            <textarea rows="10" cols="35" type="text" name="${field.id}" id="${field.id}">$!{fieldValue}</textarea>
+            <br/><span class="subText">$i18n.getText("updateissuefield-function-input.value.description")</span>
+        </td>
+    #end
 </tr>
 
 <tr bgcolor="#ffffff">
@@ -66,21 +61,22 @@
             #if(${appendValue.equals('true')})
                checked="checked"
             #end
-                >
-        <br /><span class="subText">$i18n.getText("updateissuefield-function-input.append.description")</span>
+        >
+        <br/><span class="subText">$i18n.getText("updateissuefield-function-input.append.description")</span>
     </td>
 </tr>
 
 
 <script language="JavaScript" type="text/javascript">
-<!--
+    <!--
     retoreFieldValue();
     setTimeout('retoreFieldValue()', 20);
-//-->
+    //-->
 </script>
 <tr bgcolor="#ffffff">
     <td colspan="2">
-        <div style="width: 60%;" class="infoBox centred">$i18n.getText("updateissuefield-function-input.infobox.text")</div>
+        <div style="width: 60%;" class="infoBox centred">$i18n.getText(
+            "updateissuefield-function-input.infobox.text")</div>
     </td>
 </tr>
 

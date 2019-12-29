@@ -5,14 +5,14 @@
     <td bgcolor="#ffffff" nowrap>
         <select id="date1FieldsList" name="date1FieldsList">
             #foreach ($val in ${val-date1FieldsList})
-	                <option value="${val.id}"
-	                #if(${val.id.equals($val-date1Selected.id)})
-	                    SELECTED
-	                #end
+                <option value="${val.id}"
+                    #if(${val.id.equals($val-date1Selected.id)})
+                        SELECTED
+                    #end
                 >$textutils.htmlEncode(${val.name})</option>
             #end
         </select>
-		        <br><font size="1">$i18n.getText("windowsdate-validator-edit.choose_date_field")</font>
+        <br><font size="1">$i18n.getText("windowsdate-validator-edit.choose_date_field")</font>
     </td>
 </tr>
 <tr bgcolor="#ffffff">
@@ -21,9 +21,9 @@
     </td>
     <td bgcolor="#ffffff" nowrap>
         #if (${val-windowsDays})
-	            <input type="text" id="windowsDays" name="windowsDays" value="$val-windowsDays"/>
+            <input type="text" id="windowsDays" name="windowsDays" value="$val-windowsDays"/>
         #else
-		            <input type="text" id="windowsDays" name="windowsDays" value=""/>
+            <input type="text" id="windowsDays" name="windowsDays" value=""/>
         #end
         <br><font size="1">$i18n.getText("windowsdate-validator-edit.day_frame.description")</font>
     </td>
@@ -35,20 +35,20 @@
     <td bgcolor="#ffffff" nowrap>
         <select id="date2FieldsList" name="date2FieldsList">
             #foreach ($val in ${val-date2FieldsList})
-	                <option value="${val.id}"
-                #if(${val.id.equals($val-date2Selected.id)})
-	                    SELECTED
-	                #end
-	                >$textutils.htmlEncode(${val.name})</option>
+                <option value="${val.id}"
+                    #if(${val.id.equals($val-date2Selected.id)})
+                        SELECTED
+                    #end
+                >$textutils.htmlEncode(${val.name})</option>
             #end
         </select>
-		        <br><font size="1">$i18n.getText("windowsdate-validator-edit.in_relation_to.description")</font>
+        <br><font size="1">$i18n.getText("windowsdate-validator-edit.in_relation_to.description")</font>
     </td>
 </tr>
 <tr>
     <td colspan="2">
-    	    <div style="width: 70%;" class="infoBox centred">
-    	        $i18n.getText("windowsdate-validator-edit.infobox.text")
-    	    </div>
-    	</td>
+        <div style="width: 70%;" class="infoBox centred">
+            $i18n.getText("windowsdate-validator-edit.infobox.text")
+        </div>
+    </td>
 </tr>

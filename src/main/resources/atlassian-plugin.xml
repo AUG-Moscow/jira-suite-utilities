@@ -27,7 +27,8 @@
                public="true"
                i18n-name-key="component.conditioncheckerfactory.name">
 
-        <description key="component.conditioncheckerfactory.description">Provide service for checking conditions.</description>
+        <description key="component.conditioncheckerfactory.description">Provide service for checking conditions.
+        </description>
         <interface>com.googlecode.jsu.helpers.ConditionCheckerFactory</interface>
     </component>
 
@@ -36,7 +37,9 @@
                public="false"
                i18n-name-key="component.fieldcollectionsutils.name">
 
-        <description key="component.fieldcollectionsutils.description">This utils class exposes common methods to get field collections.</description>
+        <description key="component.fieldcollectionsutils.description">This utils class exposes common methods to get
+            field collections.
+        </description>
         <interface>com.googlecode.jsu.util.FieldCollectionsUtils</interface>
     </component>
 
@@ -45,7 +48,8 @@
                public="true"
                i18n-name-key="component.transitionsmanager.name">
 
-        <description key="component.transitionsmanager.description">Generate statistics information about transitions.</description>
+        <description key="component.transitionsmanager.description">Generate statistics information about transitions.
+        </description>
         <interface>com.googlecode.jsu.transitionssummary.TransitionsManager</interface>
     </component>
 
