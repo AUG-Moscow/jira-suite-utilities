@@ -12,7 +12,6 @@ import com.googlecode.jsu.transitionssummary.TransitionSummary;
 import com.googlecode.jsu.transitionssummary.TransitionsManager;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**

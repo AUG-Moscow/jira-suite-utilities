@@ -7,14 +7,12 @@ import com.atlassian.jira.issue.customfields.manager.GenericConfigManager;
 import com.atlassian.jira.issue.customfields.persistence.CustomFieldValuePersister;
 import com.atlassian.jira.issue.fields.CustomField;
 import com.atlassian.jira.issue.fields.config.FieldConfig;
-import com.atlassian.jira.issue.status.SimpleStatus;
-import com.atlassian.jira.issue.status.Status;
 import com.atlassian.plugin.spring.scanner.annotation.component.Scanned;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.googlecode.jsu.helpers.FormattableDuration;
 import com.googlecode.jsu.transitionssummary.TransitionSummary;
 import com.googlecode.jsu.transitionssummary.TransitionsManager;
-import java.sql.Timestamp;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 

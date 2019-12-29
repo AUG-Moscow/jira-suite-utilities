@@ -6,7 +6,6 @@ import java.util.*;
 import com.atlassian.jira.issue.customfields.option.LazyLoadedOption;
 import com.atlassian.jira.issue.status.Status;
 import org.apache.commons.lang3.StringUtils;
-import org.omg.CosTransactions._TerminatorImplBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

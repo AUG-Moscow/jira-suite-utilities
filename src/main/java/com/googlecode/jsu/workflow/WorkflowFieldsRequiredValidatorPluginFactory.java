@@ -12,7 +12,6 @@ import com.googlecode.jsu.util.FieldCollectionsUtils;
 import com.googlecode.jsu.util.WorkflowUtils;
 import com.opensymphony.workflow.loader.AbstractDescriptor;
 import com.opensymphony.workflow.loader.ValidatorDescriptor;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * This class defines the parameters available for Fields Required Validator.
