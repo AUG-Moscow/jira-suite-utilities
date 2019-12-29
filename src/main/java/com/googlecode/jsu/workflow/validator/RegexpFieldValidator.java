@@ -20,7 +20,7 @@ import java.util.List;
  * a regular expression.
  */
 public class RegexpFieldValidator extends GenericValidator {
-    private static final Logger log = LoggerFactory.getLogger(RegexpFieldValidator.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RegexpFieldValidator.class);
 
     @Argument("fieldSelected")
     private String validateField;
@@ -73,8 +73,8 @@ public class RegexpFieldValidator extends GenericValidator {
                 result = lastValue.matches(expression);
             }
 
-            if (log.isDebugEnabled()) {
-                log.debug(
+            if (LOG.isDebugEnabled()) {
+                LOG.debug(
                         "Validate field \"" + field.getName() +
                                 "\" and expression \"" + expression +
                                 "\" with value [" + completeValue + "] with result " + result
@@ -92,7 +92,7 @@ public class RegexpFieldValidator extends GenericValidator {
                 );
             }
         } else {
-            log.error("Unable to find field with id [" + validateField + "]");
+            LOG.error("Unable to find field with id [" + validateField + "]");
         }
     }
 }

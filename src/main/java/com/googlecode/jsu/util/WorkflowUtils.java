@@ -100,7 +100,7 @@ public class WorkflowUtils {
     public static final String SPLITTER = "@@";
 
     private final WorkflowActionsBean workflowActionsBean = new WorkflowActionsBean();
-    private final Logger log = LoggerFactory.getLogger(WorkflowUtils.class);
+    private static final Logger LOG = LoggerFactory.getLogger(WorkflowUtils.class);
 
     private final FieldManager fieldManager;
     private final IssueManager issueManager;
@@ -259,8 +259,8 @@ public class WorkflowUtils {
                     retVal = value;
                 }
 
-                if (log.isDebugEnabled()) {
-                    log.debug(
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug(
                             String.format(
                                     "Got field value [object=%s;class=%s]",
                                     retVal, ((retVal != null) ? retVal.getClass() : "")
@@ -399,7 +399,7 @@ public class WorkflowUtils {
                         retVal = watcherManager.getWatchers(issue, Locale.getDefault());
                         break;
                     default:
-                        log.warn("Issue field \"" + fieldId + "\" is not supported.");
+                        LOG.warn("Issue field \"" + fieldId + "\" is not supported.");
 
                         GenericValue gvIssue = issue.getGenericValue();
 
@@ -412,7 +412,7 @@ public class WorkflowUtils {
         } catch (NullPointerException e) {
             retVal = null;
 
-            log.error("Unable to get field \"" + field.getId() + "\" value", e);
+            LOG.error("Unable to get field \"" + field.getId() + "\" value", e);
         }
 
         return retVal;
@@ -428,8 +428,8 @@ public class WorkflowUtils {
             FieldLayoutItem fieldLayoutItem;
             CustomFieldType cfType = customField.getCustomFieldType();
 
-            if (log.isDebugEnabled()) {
-                log.debug(
+            if (LOG.isDebugEnabled()) {
+                LOG.debug(
                         String.format(
                                 "Set custom field value " +
                                 "[field=%s,type=%s,oldValue=%s,newValueClass=%s,newValue=%s]",
@@ -563,8 +563,8 @@ public class WorkflowUtils {
                 }
             }
 
-            if (log.isDebugEnabled()) {
-                log.debug("Got new value [class=" +
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Got new value [class=" +
                         ((newValue != null) ? newValue.getClass().getName() : "null") +
                         ",value=" +
                         newValue +
@@ -584,8 +584,8 @@ public class WorkflowUtils {
                 }
             }
 
-            if (log.isDebugEnabled()) {
-                log.debug(
+            if (LOG.isDebugEnabled()) {
+                LOG.debug(
                         "Issue [" +
                         issue +
                         "] got modified fields - [" +
@@ -832,7 +832,7 @@ public class WorkflowUtils {
                     labelManager.setLabels(currentUser, issue.getId(), set, false, true);
                     break;
                 default:
-                    log.error("Issue field \"" + fieldId + "\" is not supported for setting.");
+                    LOG.error("Issue field \"" + fieldId + "\" is not supported for setting.");
                     break;
             }
         }
@@ -1089,7 +1089,7 @@ public class WorkflowUtils {
             return null;
         } else {
             if (s > 1) {
-                log.debug("Got multiple values: " + col.toString() + ". Using only one of them.");
+                LOG.debug("Got multiple values: " + col.toString() + ". Using only one of them.");
             }
             return col.iterator().next();
         }

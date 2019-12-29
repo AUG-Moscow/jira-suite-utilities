@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
  */
 public class MapFieldProcessor extends AbstractVisitor {
-    private final Logger log = LoggerFactory.getLogger(MapFieldProcessor.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MapFieldProcessor.class);
 
     private final Class<? extends Annotation> annotation;
     private final Map<String, Object> values;
@@ -46,7 +46,7 @@ public class MapFieldProcessor extends AbstractVisitor {
             field.set(source, values.get(fieldName));
             field.setAccessible(access);
         } catch (IllegalArgumentException | IllegalAccessException e) {
-            log.error("Unable to set class field - " + fieldName, e);
+            LOG.error("Unable to set class field - " + fieldName, e);
         }
     }
 

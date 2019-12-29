@@ -26,7 +26,7 @@ import java.util.Map;
  * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
  */
 public abstract class GenericValidator implements Validator {
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
+    private static final Logger LOG = LoggerFactory.getLogger(GenericValidator.class);
 
     private ValidatorErrorsBuilder errorBuilder;
     private FieldScreen fieldScreen = null;
@@ -52,8 +52,8 @@ public abstract class GenericValidator implements Validator {
     public final void validate(
             Map transientVars, Map args, PropertySet ps
     ) throws InvalidInputException, WorkflowException {
-        if (log.isDebugEnabled()) {
-            log.debug(
+        if (LOG.isDebugEnabled()) {
+            LOG.debug(
                     "Validation request: [transientVars=" +
                     transientVars +
                     ";args=" +

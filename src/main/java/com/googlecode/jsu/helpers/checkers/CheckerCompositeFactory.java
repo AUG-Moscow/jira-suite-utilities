@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
  * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
  */
 public class CheckerCompositeFactory {
-    private static final Logger log = LoggerFactory.getLogger(CheckerCompositeFactory.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CheckerCompositeFactory.class);
 
     /**
      * Create composite for checking values.
@@ -35,7 +35,7 @@ public class CheckerCompositeFactory {
         try {
             instance = (T) Class.forName(className).newInstance();
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-            log.error("Unable to initialize class [" + className + "]", e);
+            LOG.error("Unable to initialize class [" + className + "]", e);
         }
 
         return instance;

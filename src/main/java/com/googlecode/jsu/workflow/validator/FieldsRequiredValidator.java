@@ -34,7 +34,7 @@ import com.opensymphony.workflow.WorkflowException;
  * @author Gustavo Martin
  */
 public class FieldsRequiredValidator extends GenericValidator {
-    private static final Logger log = LoggerFactory.getLogger(FieldsRequiredValidator.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FieldsRequiredValidator.class);
 
     @Argument(SELECTED_FIELDS)
     private String fieldList;
@@ -76,8 +76,8 @@ public class FieldsRequiredValidator extends GenericValidator {
             issueKey = "'New issue'";
         }
 
-        if (log.isDebugEnabled()) {
-            log.debug(issueKey + ": Found " + fieldsSelected.size() + " fields for validation");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug(issueKey + ": Found " + fieldsSelected.size() + " fields for validation");
         }
 
         for (Field field : fieldsSelected) {
@@ -110,8 +110,8 @@ public class FieldsRequiredValidator extends GenericValidator {
                     fieldValue = workflowUtils.getFieldValueFromIssue(issue, field);
                 }
 
-                if (log.isDebugEnabled()) {
-                    log.debug(
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug(
                             issueKey + ": Field '" + field.getName() +
                             " - " +	field.getId() +
                             "' has value [" + fieldValue + "]"
@@ -132,8 +132,8 @@ public class FieldsRequiredValidator extends GenericValidator {
                     );
                 }
             } else {
-                if (log.isDebugEnabled()) {
-                    log.debug(
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug(
                             issueKey + ": Field '" + field.getName() +
                             " - " +	field.getId() +
                             "' is not assigned for the issue"

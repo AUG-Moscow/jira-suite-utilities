@@ -57,15 +57,15 @@ public class ConditionCheckerFactory {
             put(OPTIONID.getId(),OPTIONID);
     }};
 
-    private final Logger log = LoggerFactory.getLogger(ConditionCheckerFactory.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ConditionCheckerFactory.class);
     private final CheckerCompositeFactory checkerCompositeFactory = new CheckerCompositeFactory();
 
     public ConditionChecker getChecker(ComparisonType type, ConditionType condition) {
         String conditionClassName = CONDITION_CLASS_TEMPLATE + condition.getMnemonic();
         String comparisonClassName = COMPARISON_CLASS_TEMPLATE + type.getMnemonic();
 
-        if (log.isDebugEnabled()) {
-            log.debug(
+        if (LOG.isDebugEnabled()) {
+            LOG.debug(
                     "Using class [" + conditionClassName +
                     "] for condition [" + condition.getValue() +
                     "]; class [" + comparisonClassName +

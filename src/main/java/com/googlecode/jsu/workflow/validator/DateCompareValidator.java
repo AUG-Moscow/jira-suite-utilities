@@ -38,7 +38,7 @@ public class DateCompareValidator extends AbstractDateCompareValidator {
     @Argument("includeTimeSelected")
     private String includeTimeValue;
 
-    private final Logger log = LoggerFactory.getLogger(DateCompareValidator.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DateCompareValidator.class);
 
     private final ApplicationProperties applicationProperties;
     private final ConditionCheckerFactory conditionCheckerFactory;
@@ -102,8 +102,8 @@ public class DateCompareValidator extends AbstractDateCompareValidator {
 
                 boolean result = checker.checkValues(calDate1, calDate2);
 
-                if (log.isDebugEnabled()) {
-                    log.debug(
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug(
                             "Compare field \"" + field1.getName() +
                             "\" and field \"" + field2.getName() +
                             "\" with values [" + calDate1 +
@@ -126,7 +126,7 @@ public class DateCompareValidator extends AbstractDateCompareValidator {
                 }
             }
         } else {
-            log.error("Unable to find field with ids [" + date1 + "] and [" + date2 + "]");
+            LOG.error("Unable to find field with ids [" + date1 + "] and [" + date2 + "]");
         }
     }
 }

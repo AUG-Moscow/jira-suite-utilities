@@ -32,14 +32,14 @@ How to build
 ------------
 
 * First download latest JIRA SDK: https://developer.atlassian.com/docs/getting-started/set-up-the-atlassian-plugin-sdk-and-build-a-project
-* Then clone the repo: `$ git clone https://github.com/guillaume-alvarez/jira-suite-utilities.git`
+* Then clone the repo: `$ git clone https://github.com/AUGSpb/jira-suite-utilities.git`
 * Enter the plugin directory: `$ cd jira-suite-utilities`
-* Package the plugin: `$ atlas-mvn package`
+* Package the plugin: `$ atlas-mvn clean && atlas-mvn package`
 * Check the jar is created in `target` sub-directory: `$ jar tf target/jira-suite-utilities-2.0.0-SNAPSHOT.jar`
 * Import the plugin jar into your jira instance
-  * In section 'Administration'/'Add-ons'/'Manage add-ons'
+  * In section 'Administration'/'Apps'/'Manage apps'
   * Make sure there is no existing 'Jira Suite Utilities' plugin already installed, if so uninstall it
-  * Select the `Upload add-on` link at the top of the add-ons list to import the plugin jar file.
+  * Select the `Upload app` link at the top of the add-ons list to import the plugin jar file.
 
 
 Original plugin information

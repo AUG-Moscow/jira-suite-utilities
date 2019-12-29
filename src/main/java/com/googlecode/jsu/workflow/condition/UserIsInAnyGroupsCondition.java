@@ -17,9 +17,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author Gustavo Martin
- *
+ * <p>
  * This Condition validates if the current user is in any of the selected groups.
- *
  */
 public class UserIsInAnyGroupsCondition extends AbstractJiraCondition {
     private static final Logger LOG = LoggerFactory.getLogger(UserIsInAnyGroupsCondition.class);

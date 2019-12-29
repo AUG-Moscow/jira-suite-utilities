@@ -9,7 +9,7 @@ import com.googlecode.jsu.helpers.ConditionChecker;
  * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
  */
 class CheckerComposite implements ConditionChecker {
-    private final Logger log = LoggerFactory.getLogger(CheckerComposite.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CheckerComposite.class);
 
     private final ValueConverter valueConverter;
     private final ComparingSnipet comparingSnipet;
@@ -32,11 +32,11 @@ class CheckerComposite implements ConditionChecker {
         try {
             comp1 = (Comparable<Comparable<?>>) valueConverter.getComparable(value1);
         } catch (NumberFormatException e) {
-            log.warn("Wrong number format at [" + value1 + "]");
+            LOG.warn("Wrong number format at [" + value1 + "]");
 
             return false;
         } catch (Exception e) {
-            log.warn("Unable to get comparable from [" + value1 + "]", e);
+            LOG.warn("Unable to get comparable from [" + value1 + "]", e);
 
             return false;
         }
@@ -44,19 +44,19 @@ class CheckerComposite implements ConditionChecker {
         try {
             comp2 = valueConverter.getComparable(value2);
         } catch (NumberFormatException e) {
-            log.warn("Wrong number format at [" + value2 + "]");
+            LOG.warn("Wrong number format at [" + value2 + "]");
 
             return false;
         } catch (Exception e) {
-            log.warn("Unable to get comparable from [" + value2 + "]", e);
+            LOG.warn("Unable to get comparable from [" + value2 + "]", e);
 
             return false;
         }
 
         boolean result = comparingSnipet.compareObjects(comp1, comp2);
 
-        if (log.isDebugEnabled()) {
-            log.debug("Compare values [" + comp1 + "] and [" + comp2 + "] with result [" + result + "]");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Compare values [" + comp1 + "] and [" + comp2 + "] with result [" + result + "]");
         }
 
         return result;

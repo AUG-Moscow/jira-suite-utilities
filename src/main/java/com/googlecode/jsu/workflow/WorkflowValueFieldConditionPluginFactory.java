@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class WorkflowValueFieldConditionPluginFactory extends AbstractWorkflowPluginFactory implements WorkflowPluginConditionFactory {
-    private final Logger LOG = LoggerFactory.getLogger(WorkflowUserIsInCustomFieldConditionPluginFactory.class);
+    private static final Logger LOG = LoggerFactory.getLogger(WorkflowUserIsInCustomFieldConditionPluginFactory.class);
     private final ConditionCheckerFactory conditionCheckerFactory;
     private final FieldCollectionsUtils fieldCollectionsUtils;
     private final WorkflowUtils workflowUtils;

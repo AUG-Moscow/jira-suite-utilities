@@ -39,7 +39,7 @@ public class DateExpressionCompareValidator extends AbstractDateCompareValidator
     @Argument("includeTimeSelected")
     private String includeTimeValue;
 
-    private final Logger log = LoggerFactory.getLogger(DateExpressionCompareValidator.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DateExpressionCompareValidator.class);
 
     private final ApplicationProperties applicationProperties;
     private final ConditionCheckerFactory conditionCheckerFactory;
@@ -99,8 +99,8 @@ public class DateExpressionCompareValidator extends AbstractDateCompareValidator
 
                 boolean result = checker.checkValues(calDate1, calDate2);
 
-                if (log.isDebugEnabled()) {
-                    log.debug(
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug(
                             "Compare field \"" + field.getName() +
                             "\" and expression \"" + expression +
                             "\" with values [" + calDate1 +
@@ -117,7 +117,7 @@ public class DateExpressionCompareValidator extends AbstractDateCompareValidator
                 validateRequired(field);
             }
         } else {
-            log.error("Unable to find field with id [" + dateField + "]");
+            LOG.error("Unable to find field with id [" + dateField + "]");
         }
     }
 

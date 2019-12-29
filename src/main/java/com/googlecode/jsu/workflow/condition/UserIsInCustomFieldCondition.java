@@ -19,10 +19,11 @@ import com.opensymphony.workflow.WorkflowContext;
 
 /**
  * This Condition validates if the current user is in any of the selected groups.
+ *
  * @author Anton Afanassiev
  */
 public class UserIsInCustomFieldCondition extends AbstractJiraCondition {
-    private final Logger log = LoggerFactory.getLogger(UserIsInCustomFieldCondition.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserIsInCustomFieldCondition.class);
 
     private final UserManager userManager;
     private final WorkflowUtils workflowUtils;
@@ -43,7 +44,7 @@ public class UserIsInCustomFieldCondition extends AbstractJiraCondition {
         ApplicationUser userLogged = workflowUtils.getApplicationUser(context.getCaller());
 
         if (userLogged == null) {
-            log.warn("Unable to check condition");
+            LOG.warn("Unable to check condition");
 
             return false;
         }

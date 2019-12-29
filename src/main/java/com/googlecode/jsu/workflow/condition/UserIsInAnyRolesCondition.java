@@ -36,8 +36,8 @@ public class UserIsInAnyRolesCondition extends AbstractJiraCondition {
      */
     public boolean passesCondition(Map transientVars, Map args, PropertySet ps) {
         // Obtains the current user.
-        Issue issue=getIssue(transientVars);
-        String caller = getCallerKey(transientVars,args);
+        Issue issue = getIssue(transientVars);
+        String caller = getCallerKey(transientVars, args);
 
         if (caller != null) { // null -> User not logged in
             ApplicationUser userLogged = workflowUtils.getApplicationUser(caller);
@@ -49,7 +49,7 @@ public class UserIsInAnyRolesCondition extends AbstractJiraCondition {
 
             for (ProjectRole role : rolesSelected) {
                 try {
-                    if(projectRoleManager.isUserInProjectRole(userLogged, role, issue.getProjectObject())) {
+                    if (projectRoleManager.isUserInProjectRole(userLogged, role, issue.getProjectObject())) {
                         return true;
                     }
                 } catch (Exception e) {

@@ -24,7 +24,7 @@ import com.opensymphony.module.propertyset.PropertySet;
  * @author Gustavo Martin
  */
 public class ValueFieldCondition extends AbstractJiraCondition {
-    private final Logger log = LoggerFactory.getLogger(ValueFieldCondition.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ValueFieldCondition.class);
 
     private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -78,7 +78,7 @@ public class ValueFieldCondition extends AbstractJiraCondition {
                     }
                 } catch (Exception e) {
                     //ignore, will fail later
-                    log.warn("Unable to convert input date and time (" + valueForCompare + ")", e);
+                    LOG.warn("Unable to convert input date and time (" + valueForCompare + ")", e);
                 }
             }
 
@@ -91,7 +91,7 @@ public class ValueFieldCondition extends AbstractJiraCondition {
                     }
                 } catch (Exception e) {
                     //ignore, will fail later
-                    log.warn("Unable to convert input date without time (" + valueForCompare + ")", e);
+                    LOG.warn("Unable to convert input date without time (" + valueForCompare + ")", e);
                 }
             }
 
@@ -109,8 +109,8 @@ public class ValueFieldCondition extends AbstractJiraCondition {
                         checkValues(fieldValue, secondValue);
             }
 
-            if (log.isDebugEnabled()) {
-                log.debug(
+            if (LOG.isDebugEnabled()) {
+                LOG.debug(
                         "Comparing field '" + fieldId +
                                 "': [" + fieldValue + "]" +
                                 condition.getValue() +
@@ -119,7 +119,7 @@ public class ValueFieldCondition extends AbstractJiraCondition {
                 );
             }
         } catch (Exception e) {
-            log.error("Unable to compare values for field '" + fieldId + "'", e);
+            LOG.error("Unable to compare values for field '" + fieldId + "'", e);
         }
 
         return result;

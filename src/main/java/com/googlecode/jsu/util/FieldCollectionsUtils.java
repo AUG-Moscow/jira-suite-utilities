@@ -35,7 +35,7 @@ import static com.atlassian.jira.issue.IssueFieldConstants.*;
  */
 //TODO Can we remove dependencies to jira-core (instead only jira-api) by using interfaces (instead of classes) of referenced custom field types?
 public class FieldCollectionsUtils {
-    private static final Logger log = LoggerFactory.getLogger(FieldCollectionsUtils.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FieldCollectionsUtils.class);
 
     private static final Collection<String> TIME_TRACKING_FIELDS = Arrays.asList(
             IssueFieldConstants.TIME_ESTIMATE,
@@ -80,7 +80,7 @@ public class FieldCollectionsUtils {
         try {
             allFieldsSet.addAll(fieldManager.getAllAvailableNavigableFields());
         } catch (FieldException e) {
-            log.error("Unable to load navigable fields", e);
+            LOG.error("Unable to load navigable fields", e);
         }
 
         return new ArrayList<>(allFieldsSet);

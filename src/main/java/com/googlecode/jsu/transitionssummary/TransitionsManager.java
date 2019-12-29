@@ -19,7 +19,7 @@ import java.util.*;
  *
  */
 public class TransitionsManager {
-    private static final Logger log = LoggerFactory.getLogger(TransitionsManager.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TransitionsManager.class);
 
     private final OfBizDelegator ofBizDelegator;
     private final DateTimeFormatter userFormatter;
@@ -55,7 +55,7 @@ public class TransitionsManager {
             // Sets an ID for the Transition.
             String transitionId = trans.getFromStatus().getId() + "to" + trans.getToStatus().getId();
 
-            log.debug("Transition found [" + transitionId + "] for issue " + issue.getKey());
+            LOG.debug("Transition found [" + transitionId + "] for issue " + issue.getKey());
 
             TransitionSummary tranSummary;
 
