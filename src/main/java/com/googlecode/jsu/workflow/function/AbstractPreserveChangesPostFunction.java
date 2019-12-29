@@ -82,7 +82,6 @@ abstract class AbstractPreserveChangesPostFunction extends AbstractJiraFunctionP
     /**
      * Release holder for changes.
      */
-    @SuppressWarnings("unchecked")
     private void releaseChangeHolder(IssueChangeHolder holder, Map<String, Object> transientVars) {
         List<ChangeItemBean> items = holder.getChangeItems();
 

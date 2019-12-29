@@ -56,7 +56,6 @@ public class TransitionSummaryAction extends AbstractIssueAction {
      * @see com.atlassian.jira.issue.action.IssueAction#getHtml(com.atlassian.jira.web.action.JiraWebActionSupport)
      */
     public String getHtml(JiraWebActionSupport webAction) {
-        @SuppressWarnings("unchecked")
         Map<String, Object> params = UtilMisc.toMap("webAction", webAction, "action", this);
 
         return descriptor.getHtml("view", params);

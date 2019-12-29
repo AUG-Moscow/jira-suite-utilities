@@ -88,7 +88,6 @@ public class TransitionsManager {
      * It obtains all status changes data from the Change History.
      */
     private List<Transition> getStatusChanges(Issue issue, Timestamp tsCreated){
-        @SuppressWarnings("unchecked")
         Map<String, Object> params = new HashMap<>();
         params.put("issue",issue.getId());
         List<GenericValue> changeGroups = ofBizDelegator.findByAnd("ChangeGroup", params);

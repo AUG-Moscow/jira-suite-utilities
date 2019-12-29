@@ -40,11 +40,7 @@ public class ValueFieldCondition extends AbstractJiraCondition {
     /* (non-Javadoc)
      * @see com.opensymphony.workflow.Condition#passesCondition(java.util.Map, java.util.Map, com.opensymphony.module.propertyset.PropertySet)
      */
-    public boolean passesCondition(
-            @SuppressWarnings("rawtypes") Map transientVars,
-            @SuppressWarnings("rawtypes") Map args,
-            PropertySet ps
-    ) {
+    public boolean passesCondition(@SuppressWarnings("rawtypes") Map transientVars, Map args, PropertySet ps) {
         final Issue issue = getIssue(transientVars);
 
         String fieldId = (String) args.get("fieldsList");
@@ -61,65 +57,65 @@ public class ValueFieldCondition extends AbstractJiraCondition {
             Object fieldValue = workflowUtils.getFieldValueFromIssue(issue, field, true);
 
             //special case Option, behave like String comparison, however compare id of option to value of input
-            if(ConditionCheckerFactory.OPTIONID.equals(comparison)) {
+            if (ConditionCheckerFactory.OPTIONID.equals(comparison)) {
                 comparison = ConditionCheckerFactory.STRING;
                 fieldValue = getOptionId(fieldValue);
             }
 
-            if(fieldValue instanceof java.sql.Timestamp) {
-                java.sql.Timestamp timestamp = (java.sql.Timestamp)fieldValue;
+            if (fieldValue instanceof java.sql.Timestamp) {
+                java.sql.Timestamp timestamp = (java.sql.Timestamp) fieldValue;
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(timestamp.getTime());
                 fieldValue = calendar;
             }
 
-            if(comparison.equals(ConditionCheckerFactory.DATE)) {
+            if (comparison.equals(ConditionCheckerFactory.DATE)) {
                 try {
-                    if(!StringUtils.isBlank(valueForCompare)) {
+                    if (!StringUtils.isBlank(valueForCompare)) {
                         Calendar calendar = Calendar.getInstance();
                         calendar.setTimeInMillis(DATE_TIME_FORMAT.parse(valueForCompare).getTime());
                         secondValue = calendar;
                     }
-                } catch(Exception e) {
+                } catch (Exception e) {
                     //ignore, will fail later
-                    log.warn("Unable to convert input date and time (" + valueForCompare + ")",e);
+                    log.warn("Unable to convert input date and time (" + valueForCompare + ")", e);
                 }
             }
 
-            if(comparison.equals(ConditionCheckerFactory.DATE_WITHOUT_TIME)) {
+            if (comparison.equals(ConditionCheckerFactory.DATE_WITHOUT_TIME)) {
                 try {
-                    if(!StringUtils.isBlank(valueForCompare)) {
+                    if (!StringUtils.isBlank(valueForCompare)) {
                         Calendar calendar = Calendar.getInstance();
                         calendar.setTimeInMillis(DATE_FORMAT.parse(valueForCompare).getTime());
                         secondValue = calendar;
                     }
-                } catch(Exception e) {
+                } catch (Exception e) {
                     //ignore, will fail later
-                    log.warn("Unable to convert input date without time (" + valueForCompare + ")",e);
+                    log.warn("Unable to convert input date without time (" + valueForCompare + ")", e);
                 }
             }
 
 
             //multiple values slightly different, equal means contains, not equal means does not contain
             if (fieldValue instanceof Collection) {
-                if(condition.equals(ConditionCheckerFactory.NOT_EQUAL)) {
-                    result = checkCollectionDoesNotContain(comparison,condition,(Collection)fieldValue,valueForCompare);
+                if (condition.equals(ConditionCheckerFactory.NOT_EQUAL)) {
+                    result = checkCollectionDoesNotContain(comparison, condition, (Collection) fieldValue, valueForCompare);
                 } else {
-                    result = checkCollection(comparison,condition,(Collection)fieldValue,valueForCompare);
+                    result = checkCollection(comparison, condition, (Collection) fieldValue, valueForCompare);
                 }
             } else {
                 result = conditionCheckerFactory.
-                    getChecker(comparison, condition).
-                    checkValues(fieldValue, secondValue);
+                        getChecker(comparison, condition).
+                        checkValues(fieldValue, secondValue);
             }
 
             if (log.isDebugEnabled()) {
                 log.debug(
                         "Comparing field '" + fieldId +
-                        "': [" + fieldValue + "]" +
-                        condition.getValue() +
-                        "[" + valueForCompare + "] as " +
-                        comparison.getValueKey() + " = " + result
+                                "': [" + fieldValue + "]" +
+                                condition.getValue() +
+                                "[" + valueForCompare + "] as " +
+                                comparison.getValueKey() + " = " + result
                 );
             }
         } catch (Exception e) {
@@ -130,15 +126,15 @@ public class ValueFieldCondition extends AbstractJiraCondition {
     }
 
     private Object getOptionId(Object fieldValue) {
-        if(fieldValue instanceof LazyLoadedOption) {
-            return ((LazyLoadedOption)fieldValue).getOptionId().toString();
-        } else  if(fieldValue instanceof Status) {
-            return ((Status)fieldValue).getId();
-        } else if(fieldValue instanceof Collection) {
+        if (fieldValue instanceof LazyLoadedOption) {
+            return ((LazyLoadedOption) fieldValue).getOptionId().toString();
+        } else if (fieldValue instanceof Status) {
+            return ((Status) fieldValue).getId();
+        } else if (fieldValue instanceof Collection) {
             ArrayList<String> al = new ArrayList<>();
-            for(Object v:(Collection)fieldValue) {
-                if(v instanceof LazyLoadedOption) {
-                    al.add(((LazyLoadedOption)v).getOptionId().toString());
+            for (Object v : (Collection) fieldValue) {
+                if (v instanceof LazyLoadedOption) {
+                    al.add(((LazyLoadedOption) v).getOptionId().toString());
                 }
             }
             return al;
@@ -154,7 +150,7 @@ public class ValueFieldCondition extends AbstractJiraCondition {
                                                   ConditionType condition,
                                                   Collection values,
                                                   String valueToCompare) {
-        return !checkCollection(comparison,ConditionCheckerFactory.EQUAL,values,valueToCompare);
+        return !checkCollection(comparison, ConditionCheckerFactory.EQUAL, values, valueToCompare);
     }
 
     //if only one single item fulfils the condition, will return
@@ -171,6 +167,6 @@ public class ValueFieldCondition extends AbstractJiraCondition {
                 break;
             }
         }
-        return values.isEmpty()?valueToCompare==null||valueToCompare.isEmpty():result;
+        return values.isEmpty() ? valueToCompare == null || valueToCompare.isEmpty() : result;
     }
 }
