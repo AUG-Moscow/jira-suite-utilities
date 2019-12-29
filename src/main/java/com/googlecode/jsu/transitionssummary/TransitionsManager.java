@@ -91,7 +91,7 @@ public class TransitionsManager {
         Map<String, Object> params = new HashMap<>();
         params.put("issue",issue.getId());
         List<GenericValue> changeGroups = ofBizDelegator.findByAnd("ChangeGroup", params);
-        changeGroups.sort((o1, o2) -> o1.getTimestamp("created").compareTo(o2.getTimestamp("created")));
+        changeGroups.sort(Comparator.comparing(o -> o.getTimestamp("created")));
 
         List<Transition> retList = new ArrayList<>();
         Timestamp tsStartDate = new Timestamp(tsCreated.getTime());

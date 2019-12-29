@@ -40,7 +40,7 @@ public class ValueFieldCondition extends AbstractJiraCondition {
     /* (non-Javadoc)
      * @see com.opensymphony.workflow.Condition#passesCondition(java.util.Map, java.util.Map, com.opensymphony.module.propertyset.PropertySet)
      */
-    public boolean passesCondition(@SuppressWarnings("rawtypes") Map transientVars, Map args, PropertySet ps) {
+    public boolean passesCondition(Map transientVars, Map args, PropertySet ps) {
         final Issue issue = getIssue(transientVars);
 
         String fieldId = (String) args.get("fieldsList");
