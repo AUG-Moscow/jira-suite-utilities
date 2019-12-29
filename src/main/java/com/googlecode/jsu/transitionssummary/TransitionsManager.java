@@ -92,15 +92,7 @@ public class TransitionsManager {
         Map<String, Object> params = new HashMap<>();
         params.put("issue",issue.getId());
         List<GenericValue> changeGroups = ofBizDelegator.findByAnd("ChangeGroup", params);
-
-        // Added by caisd_1998 at hotmail dot com
-        Collections.sort(changeGroups,
-            new Comparator<GenericValue>() {
-                public int compare(GenericValue o1, GenericValue o2) {
-                    return o1.getTimestamp("created").compareTo(o2.getTimestamp("created"));
-                }
-            }
-        );
+        changeGroups.sort((o1, o2) -> o1.getTimestamp("created").compareTo(o2.getTimestamp("created")));
 
         List<Transition> retList = new ArrayList<>();
         Timestamp tsStartDate = new Timestamp(tsCreated.getTime());

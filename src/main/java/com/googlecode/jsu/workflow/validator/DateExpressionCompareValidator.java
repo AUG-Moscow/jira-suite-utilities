@@ -136,16 +136,21 @@ public class DateExpressionCompareValidator extends AbstractDateCompareValidator
 
                 Calendar cal = Calendar.getInstance();
                 int calField;
-                if("d".equals(unit)) {
-                    calField = Calendar.DAY_OF_YEAR;
-                } else if("w".equals(unit)) {
-                    calField = Calendar.WEEK_OF_YEAR;
-                } else if("m".equals(unit)) {
-                    calField = Calendar.MONTH;
-                } else if("y".equals(unit)) {
-                    calField = Calendar.YEAR;
-                } else {
-                    return null;
+                switch (unit) {
+                    case "d":
+                        calField = Calendar.DAY_OF_YEAR;
+                        break;
+                    case "w":
+                        calField = Calendar.WEEK_OF_YEAR;
+                        break;
+                    case "m":
+                        calField = Calendar.MONTH;
+                        break;
+                    case "y":
+                        calField = Calendar.YEAR;
+                        break;
+                    default:
+                        return null;
                 }
                 cal.add(calField, offset);
                 return cal.getTime();

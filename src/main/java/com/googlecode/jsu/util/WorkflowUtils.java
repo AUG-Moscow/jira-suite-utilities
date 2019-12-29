@@ -275,108 +275,141 @@ public class WorkflowUtils {
                 Collection<?> retCollection;
 
                 // Special treatment of fields.
-                if (fieldId.equals(IssueFieldConstants.ATTACHMENT)) {
-                    // return a collection with the attachments associated to given issue.
-                    retCollection = issue.getAttachments();
-
-                    if (retCollection != null && !retCollection.isEmpty()) {
-                        retVal = retCollection;
-                    }
-                } else if (fieldId.equals(IssueFieldConstants.AFFECTED_VERSIONS)) {
-                    retCollection = issue.getAffectedVersions();
-
-                    if (retCollection != null && !retCollection.isEmpty()) {
-                        retVal = retCollection;
-                    }
-                } else if (fieldId.equals(IssueFieldConstants.COMMENT)) {
-                    // return a list with the comments of a given issue.
-                    try {
-                        retCollection = issueManager.getEntitiesByIssueObject(
-                                IssueRelationConstants.COMMENTS, issue
-                        );
+                switch (fieldId) {
+                    case IssueFieldConstants.ATTACHMENT:
+                        // return a collection with the attachments associated to given issue.
+                        retCollection = issue.getAttachments();
 
                         if (retCollection != null && !retCollection.isEmpty()) {
                             retVal = retCollection;
                         }
-                    } catch (GenericEntityException e) {
-                        retVal = null;
-                    }
-                } else if (fieldId.equals(IssueFieldConstants.COMPONENTS)) {
-                    retCollection = issue.getComponentObjects();
+                        break;
+                    case IssueFieldConstants.AFFECTED_VERSIONS:
+                        retCollection = issue.getAffectedVersions();
 
-                    if (retCollection != null && !retCollection.isEmpty()) {
-                        retVal = retCollection;
-                    }
-                } else if (fieldId.equals(IssueFieldConstants.FIX_FOR_VERSIONS)) {
-                    retCollection = issue.getFixVersions();
+                        if (retCollection != null && !retCollection.isEmpty()) {
+                            retVal = retCollection;
+                        }
+                        break;
+                    case IssueFieldConstants.COMMENT:
+                        // return a list with the comments of a given issue.
+                        try {
+                            retCollection = issueManager.getEntitiesByIssueObject(
+                                    IssueRelationConstants.COMMENTS, issue
+                            );
 
-                    if (retCollection != null && !retCollection.isEmpty()) {
-                        retVal = retCollection;
-                    }
-                } else if (fieldId.equals(IssueFieldConstants.THUMBNAIL)) {
-                    // Not implemented, yet.
-                } else if (fieldId.equals(IssueFieldConstants.ISSUE_TYPE)) {
-                    retVal = issue.getIssueTypeObject();
-                } else if (fieldId.equals(IssueFieldConstants.TIMETRACKING)) {
-                    // Not implemented, yet.
-                } else if (fieldId.equals(IssueFieldConstants.ISSUE_LINKS)) {
-                    retVal = issueLinkManager.getIssueLinks(issue.getId());
-                } else if (fieldId.equals(IssueFieldConstants.WORKRATIO)) {
-                    retVal = String.valueOf(WorkRatio.getWorkRatio(issue));
-                } else if (fieldId.equals(IssueFieldConstants.ISSUE_KEY)) {
-                    retVal = issue.getKey();
-                } else if (fieldId.equals(IssueFieldConstants.SUBTASKS)) {
-                    retCollection = issue.getSubTaskObjects();
+                            if (retCollection != null && !retCollection.isEmpty()) {
+                                retVal = retCollection;
+                            }
+                        } catch (GenericEntityException e) {
+                            retVal = null;
+                        }
+                        break;
+                    case IssueFieldConstants.COMPONENTS:
+                        retCollection = issue.getComponentObjects();
 
-                    if (retCollection != null && !retCollection.isEmpty()) {
-                        retVal = retCollection;
-                    }
-                } else if (fieldId.equals(IssueFieldConstants.PRIORITY)) {
-                    retVal = issue.getPriorityObject();
-                } else if (fieldId.equals(IssueFieldConstants.RESOLUTION)) {
-                    retVal = issue.getResolutionObject();
-                } else if (fieldId.equals(IssueFieldConstants.STATUS)) {
-                    retVal = issue.getStatusObject();
-                } else if (fieldId.equals(IssueFieldConstants.PROJECT)) {
-                    retVal = issue.getProjectObject();
-                } else if (fieldId.equals(IssueFieldConstants.SECURITY)) {
-                    retVal = issue.getSecurityLevel();
-                } else if (fieldId.equals(IssueFieldConstants.TIME_ESTIMATE)) {
-                    retVal = issue.getEstimate();
-                } else if (fieldId.equals(IssueFieldConstants.TIME_SPENT)) {
-                    retVal = issue.getTimeSpent();
-                } else if (fieldId.equals(IssueFieldConstants.AGGREGATE_TIME_SPENT)) {
-                    retVal = issue.getTimeSpent();
-                } else if (fieldId.equals(IssueFieldConstants.ASSIGNEE)) {
-                    retVal = issue.getAssigneeUser();
-                } else if (fieldId.equals(IssueFieldConstants.REPORTER)) {
-                    retVal = issue.getReporterUser();
-                } else if (fieldId.equals(IssueFieldConstants.DESCRIPTION)) {
-                    retVal = issue.getDescription();
-                } else if (fieldId.equals(IssueFieldConstants.ENVIRONMENT)) {
-                    retVal = issue.getEnvironment();
-                } else if (fieldId.equals(IssueFieldConstants.SUMMARY)) {
-                    retVal = issue.getSummary();
-                } else if (fieldId.equals(IssueFieldConstants.DUE_DATE)) {
-                    retVal = issue.getDueDate();
-                } else if (fieldId.equals(IssueFieldConstants.UPDATED)) {
-                    retVal = issue.getUpdated();
-                } else if (fieldId.equals(IssueFieldConstants.CREATED)) {
-                    retVal = issue.getCreated();
-                } else if (fieldId.equals(IssueFieldConstants.RESOLUTION_DATE)) {
-                    retVal = issue.getResolutionDate();
-                } else if (fieldId.equals(IssueFieldConstants.LABELS)) {
-                    retVal = issue.getLabels();
-                } else if (fieldId.equals(IssueFieldConstants.WATCHES)) {
-                    retVal = watcherManager.getWatchers(issue, Locale.getDefault());
-                } else {
-                    log.warn("Issue field \"" + fieldId + "\" is not supported.");
+                        if (retCollection != null && !retCollection.isEmpty()) {
+                            retVal = retCollection;
+                        }
+                        break;
+                    case IssueFieldConstants.FIX_FOR_VERSIONS:
+                        retCollection = issue.getFixVersions();
 
-                    GenericValue gvIssue = issue.getGenericValue();
+                        if (retCollection != null && !retCollection.isEmpty()) {
+                            retVal = retCollection;
+                        }
+                        break;
+                    case IssueFieldConstants.THUMBNAIL:
+                        // Not implemented, yet.
+                        break;
+                    case IssueFieldConstants.ISSUE_TYPE:
+                        retVal = issue.getIssueTypeObject();
+                        break;
+                    case IssueFieldConstants.TIMETRACKING:
+                        // Not implemented, yet.
+                        break;
+                    case IssueFieldConstants.ISSUE_LINKS:
+                        retVal = issueLinkManager.getIssueLinks(issue.getId());
+                        break;
+                    case IssueFieldConstants.WORKRATIO:
+                        retVal = String.valueOf(WorkRatio.getWorkRatio(issue));
+                        break;
+                    case IssueFieldConstants.ISSUE_KEY:
+                        retVal = issue.getKey();
+                        break;
+                    case IssueFieldConstants.SUBTASKS:
+                        retCollection = issue.getSubTaskObjects();
 
-                    if (gvIssue != null) {
-                        retVal = gvIssue.get(fieldId);
-                    }
+                        if (retCollection != null && !retCollection.isEmpty()) {
+                            retVal = retCollection;
+                        }
+                        break;
+                    case IssueFieldConstants.PRIORITY:
+                        retVal = issue.getPriorityObject();
+                        break;
+                    case IssueFieldConstants.RESOLUTION:
+                        retVal = issue.getResolutionObject();
+                        break;
+                    case IssueFieldConstants.STATUS:
+                        retVal = issue.getStatusObject();
+                        break;
+                    case IssueFieldConstants.PROJECT:
+                        retVal = issue.getProjectObject();
+                        break;
+                    case IssueFieldConstants.SECURITY:
+                        retVal = issue.getSecurityLevel();
+                        break;
+                    case IssueFieldConstants.TIME_ESTIMATE:
+                        retVal = issue.getEstimate();
+                        break;
+                    case IssueFieldConstants.TIME_SPENT:
+                        retVal = issue.getTimeSpent();
+                        break;
+                    case IssueFieldConstants.AGGREGATE_TIME_SPENT:
+                        retVal = issue.getTimeSpent();
+                        break;
+                    case IssueFieldConstants.ASSIGNEE:
+                        retVal = issue.getAssigneeUser();
+                        break;
+                    case IssueFieldConstants.REPORTER:
+                        retVal = issue.getReporterUser();
+                        break;
+                    case IssueFieldConstants.DESCRIPTION:
+                        retVal = issue.getDescription();
+                        break;
+                    case IssueFieldConstants.ENVIRONMENT:
+                        retVal = issue.getEnvironment();
+                        break;
+                    case IssueFieldConstants.SUMMARY:
+                        retVal = issue.getSummary();
+                        break;
+                    case IssueFieldConstants.DUE_DATE:
+                        retVal = issue.getDueDate();
+                        break;
+                    case IssueFieldConstants.UPDATED:
+                        retVal = issue.getUpdated();
+                        break;
+                    case IssueFieldConstants.CREATED:
+                        retVal = issue.getCreated();
+                        break;
+                    case IssueFieldConstants.RESOLUTION_DATE:
+                        retVal = issue.getResolutionDate();
+                        break;
+                    case IssueFieldConstants.LABELS:
+                        retVal = issue.getLabels();
+                        break;
+                    case IssueFieldConstants.WATCHES:
+                        retVal = watcherManager.getWatchers(issue, Locale.getDefault());
+                        break;
+                    default:
+                        log.warn("Issue field \"" + fieldId + "\" is not supported.");
+
+                        GenericValue gvIssue = issue.getGenericValue();
+
+                        if (gvIssue != null) {
+                            retVal = gvIssue.get(fieldId);
+                        }
+                        break;
                 }
             }
         } catch (NullPointerException e) {
@@ -575,214 +608,235 @@ public class WorkflowUtils {
             final String fieldId = field.getId();
 
             // Special treatment of fields.
-            if (fieldId.equals(IssueFieldConstants.ATTACHMENT)) {
-                throw new UnsupportedOperationException("Not implemented");
-                //				// return a collection with the attachments associated to given issue.
-                //				retCollection = (Collection)issue.getExternalFieldValue(fieldId);
-                //				if(retCollection==null || retCollection.isEmpty()){
-                //					isEmpty = true;
-                //				}else{
-                //					retVal = retCollection;
-                //				}
-            } else if (fieldId.equals(IssueFieldConstants.AFFECTED_VERSIONS)) {
-                Collection<Version> versions = convertValueToVersions(issue, value);
-                issue.setAffectedVersions(versions);
-            } else if (fieldId.equals(IssueFieldConstants.COMMENT)) {
-                throw new UnsupportedOperationException("Not implemented");
-
-                //				// return a list with the comments of a given issue.
-                //				try {
-                //					retCollection = ManagerFactory.getIssueManager().getEntitiesByIssue(IssueRelationConstants.COMMENTS, issue.getGenericValue());
-                //					if(retCollection==null || retCollection.isEmpty()){
-                //						isEmpty = true;
-                //					}else{
-                //						retVal = retCollection;
-                //					}
-                //				} catch (GenericEntityException e) {
-                //					retVal = null;
-                //				}
-            } else if (fieldId.equals(IssueFieldConstants.COMPONENTS)) {
-                Collection<ProjectComponent> components = convertValueToComponents(issue, value);
-                issue.setComponent(components);
-            } else if (fieldId.equals(IssueFieldConstants.FIX_FOR_VERSIONS)) {
-                Collection<Version> versions = convertValueToVersions(issue, value);
-                issue.setFixVersions(versions);
-            } else if (fieldId.equals(IssueFieldConstants.THUMBNAIL)) {
-                throw new UnsupportedOperationException("Not implemented");
-
-                //				// Not implemented, yet.
-                //				isEmpty = true;
-            } else if (fieldId.equals(IssueFieldConstants.ISSUE_TYPE)) {
-                throw new UnsupportedOperationException("Not implemented");
-                //
-                //				retVal = issue.getIssueTypeObject();
-            } else if (fieldId.equals(IssueFieldConstants.TIMETRACKING)) {
-                throw new UnsupportedOperationException("Not implemented");
-                //
-                //				// Not implemented, yet.
-                //				isEmpty = true;
-            } else if (fieldId.equals(IssueFieldConstants.ISSUE_LINKS)) {
-                throw new UnsupportedOperationException("Not implemented");
-                //
-                //				retVal = ComponentAccessor.getIssueLinkManager().getIssueLinks(issue.getId());
-            } else if (fieldId.equals(IssueFieldConstants.WORKRATIO)) {
-                throw new UnsupportedOperationException("Not implemented");
-                //
-                //				retVal = String.valueOf(WorkRatio.getWorkRatio(issue));
-            } else if (fieldId.equals(IssueFieldConstants.ISSUE_KEY)) {
-                throw new UnsupportedOperationException("Not implemented");
-                //
-                //				retVal = issue.getKey();
-            } else if (fieldId.equals(IssueFieldConstants.SUBTASKS)) {
-                throw new UnsupportedOperationException("Not implemented");
-                //
-                //				retCollection = issue.getSubTasks();
-                //				if(retCollection==null || retCollection.isEmpty()){
-                //					isEmpty = true;
-                //				}else{
-                //					retVal = retCollection;
-                //				}
-            } else if (fieldId.equals(IssueFieldConstants.PRIORITY)) {
-                if (value == null) {
-                    issue.setPriorityObject(null);
-                } else {
-                    Priority priority = convertValueToPriority(value);
-                    if (priority != null) {
-                        issue.setPriorityObject(priority);
-                    } //else leave it untouched.
-                }
-            } else if (fieldId.equals(IssueFieldConstants.RESOLUTION)) {
-                if (value == null) {
-                    issue.setResolutionObject(null);
-                } else if (value instanceof Resolution) {
-                    issue.setResolutionId(((Resolution) value).getId());
-                } else {
-                    Collection<Resolution> resolutions = ComponentAccessor.getConstantsManager().getResolutionObjects();
-                    Resolution resolution = null;
-                    String s = value.toString().trim();
-
-                    for (Resolution r : resolutions) {
-                        if (r.getName().equalsIgnoreCase(s)) {
-                            resolution = r;
-
-                            break;
-                        }
-                    }
-
-                    if (resolution != null) {
-                        issue.setResolutionId(resolution.getId());
-                    } else {
-                        throw new IllegalArgumentException("Unable to find resolution with name \"" + value + "\"");
-                    }
-                }
-            } else if (fieldId.equals(IssueFieldConstants.STATUS)) {
-                if (value == null) {
-                    issue.setStatusObject(null);
-                } else if (value instanceof Status) {
-                    issue.setStatusId(((Status) value).getId());
-                } else {
-                    Status status = ComponentAccessor.getConstantsManager().getStatusByName(value.toString());
-
-                    if (status != null) {
-                        issue.setStatusObject(status);
-                    } else {
-                        throw new IllegalArgumentException("Unable to find status with name \"" + value + "\"");
-                    }
-                }
-            } else if (fieldId.equals(IssueFieldConstants.SECURITY)) {
-                if (value == null) {
-                    issue.setSecurityLevelId(null);
-                } else if (value instanceof Long) {
-                    issue.setSecurityLevelId((Long) value);
-                } else {
-                    Collection<IssueSecurityLevel> levels;
-                    levels = issueSecurityLevelManager.getIssueSecurityLevelsByName(value.toString());
-
-                    if (levels == null) {
-                        throw new IllegalArgumentException("Unable to find security level \"" + value + "\"");
-                    }
-
-                    if (levels.size() > 1) {
-                        throw new IllegalArgumentException("More that one security level with name \"" + value + "\"");
-                    }
-
-                    issue.setSecurityLevelId(levels.iterator().next().getId());
-                }
-            } else if (fieldId.equals(IssueFieldConstants.ASSIGNEE)) {
-                ApplicationUser user = convertValueToUser(value);
-                issue.setAssignee(user);
-            } else if (fieldId.equals(IssueFieldConstants.DUE_DATE)) {
-                if (value == null) {
-                    issue.setDueDate(null);
-                }
-
-                if (value instanceof Timestamp) {
-                    issue.setDueDate((Timestamp) value);
-                } else if (value instanceof String) {
-                    SimpleDateFormat formatter = new SimpleDateFormat(
-                            applicationProperties.getDefaultString(APKeys.JIRA_DATE_TIME_PICKER_JAVA_FORMAT)
-                    );
-
-                    try {
-                        Date date = formatter.parse((String) value);
-
-                        if (date != null) {
-                            issue.setDueDate(new Timestamp(date.getTime()));
-                        } else {
-                            issue.setDueDate(null);
-                        }
-                    } catch (ParseException e) {
-                        throw new IllegalArgumentException("Wrong date format exception for \"" + value + "\"");
-                    }
-                }
-            } else if (fieldId.equals(IssueFieldConstants.REPORTER)) {
-                ApplicationUser user =  convertValueToUser(value);
-                issue.setReporter(user);
-            } else if (fieldId.equals(IssueFieldConstants.SUMMARY)) {
-                if ((value == null) || (value instanceof String)) {
-                    issue.setSummary((String) value);
-                } else {
-                    issue.setSummary(value.toString());
-                }
-            } else if (fieldId.equals(IssueFieldConstants.DESCRIPTION)) {
-                if ((value == null) || (value instanceof String)) {
-                    issue.setDescription((String) value);
-                } else {
-                    issue.setDescription(convertToString(value));
-//                    issue.setDescription(value.toString());
-                }
-            } else if (fieldId.equals(IssueFieldConstants.ENVIRONMENT)) {
-                if ((value == null) || (value instanceof String)) {
-                    issue.setEnvironment((String) value);
-                } else {
-                    issue.setEnvironment(value.toString());
-                }
-            } else if (fieldId.equals(IssueFieldConstants.WATCHES)) {
-                if (value == null) {
-                    clearWatchers(issue);
-                } else if(value instanceof Collection) {
-                    Collection collection = (Collection)value;
-                    if(collection.size()==0) {
-                        clearWatchers(issue);
-                    } else if(collection.iterator().next() instanceof ApplicationUser) {
-                        clearWatchers(issue);
-                        for(Object o:collection) {
-                            watcherManager.startWatching((ApplicationUser)o,issue);
-                        }
-                    } else {
-                        throw new UnsupportedOperationException("Data not supported for copy into watchers.");
-                    }
-                } else if(value instanceof ApplicationUser) {
-                    clearWatchers(issue);
-                    watcherManager.startWatching((ApplicationUser) value, issue);
-                } else {
+            switch (fieldId) {
+                case IssueFieldConstants.ATTACHMENT:
                     throw new UnsupportedOperationException("Not implemented");
+                    //				// return a collection with the attachments associated to given issue.
+                    //				retCollection = (Collection)issue.getExternalFieldValue(fieldId);
+                    //				if(retCollection==null || retCollection.isEmpty()){
+                    //					isEmpty = true;
+                    //				}else{
+                    //					retVal = retCollection;
+                    //				}
+                case IssueFieldConstants.AFFECTED_VERSIONS: {
+                    Collection<Version> versions = convertValueToVersions(issue, value);
+                    issue.setAffectedVersions(versions);
+                    break;
                 }
-            } else if (fieldId.equals(IssueFieldConstants.LABELS)) {
-                Set<String> set = convertToSetForLabels(value);
-                labelManager.setLabels(currentUser, issue.getId(), set,false,true);
-            } else {
-                log.error("Issue field \"" + fieldId + "\" is not supported for setting.");
+                case IssueFieldConstants.COMMENT:
+                    throw new UnsupportedOperationException("Not implemented");
+
+                    //				// return a list with the comments of a given issue.
+                    //				try {
+                    //					retCollection = ManagerFactory.getIssueManager().getEntitiesByIssue(IssueRelationConstants.COMMENTS, issue.getGenericValue());
+                    //					if(retCollection==null || retCollection.isEmpty()){
+                    //						isEmpty = true;
+                    //					}else{
+                    //						retVal = retCollection;
+                    //					}
+                    //				} catch (GenericEntityException e) {
+                    //					retVal = null;
+                    //				}
+                case IssueFieldConstants.COMPONENTS:
+                    Collection<ProjectComponent> components = convertValueToComponents(issue, value);
+                    issue.setComponent(components);
+                    break;
+                case IssueFieldConstants.FIX_FOR_VERSIONS: {
+                    Collection<Version> versions = convertValueToVersions(issue, value);
+                    issue.setFixVersions(versions);
+                    break;
+                }
+                case IssueFieldConstants.THUMBNAIL:
+                    throw new UnsupportedOperationException("Not implemented");
+
+                    //				// Not implemented, yet.
+                    //				isEmpty = true;
+                case IssueFieldConstants.ISSUE_TYPE:
+                    throw new UnsupportedOperationException("Not implemented");
+                    //
+                    //				retVal = issue.getIssueTypeObject();
+                case IssueFieldConstants.TIMETRACKING:
+                    throw new UnsupportedOperationException("Not implemented");
+                    //
+                    //				// Not implemented, yet.
+                    //				isEmpty = true;
+                case IssueFieldConstants.ISSUE_LINKS:
+                    throw new UnsupportedOperationException("Not implemented");
+                    //
+                    //				retVal = ComponentAccessor.getIssueLinkManager().getIssueLinks(issue.getId());
+                case IssueFieldConstants.WORKRATIO:
+                    throw new UnsupportedOperationException("Not implemented");
+                    //
+                    //				retVal = String.valueOf(WorkRatio.getWorkRatio(issue));
+                case IssueFieldConstants.ISSUE_KEY:
+                    throw new UnsupportedOperationException("Not implemented");
+                    //
+                    //				retVal = issue.getKey();
+                case IssueFieldConstants.SUBTASKS:
+                    throw new UnsupportedOperationException("Not implemented");
+                    //
+                    //				retCollection = issue.getSubTasks();
+                    //				if(retCollection==null || retCollection.isEmpty()){
+                    //					isEmpty = true;
+                    //				}else{
+                    //					retVal = retCollection;
+                    //				}
+                case IssueFieldConstants.PRIORITY:
+                    if (value == null) {
+                        issue.setPriorityObject(null);
+                    } else {
+                        Priority priority = convertValueToPriority(value);
+                        if (priority != null) {
+                            issue.setPriorityObject(priority);
+                        } //else leave it untouched.
+                    }
+                    break;
+                case IssueFieldConstants.RESOLUTION:
+                    if (value == null) {
+                        issue.setResolutionObject(null);
+                    } else if (value instanceof Resolution) {
+                        issue.setResolutionId(((Resolution) value).getId());
+                    } else {
+                        Collection<Resolution> resolutions = ComponentAccessor.getConstantsManager().getResolutionObjects();
+                        Resolution resolution = null;
+                        String s = value.toString().trim();
+
+                        for (Resolution r : resolutions) {
+                            if (r.getName().equalsIgnoreCase(s)) {
+                                resolution = r;
+
+                                break;
+                            }
+                        }
+
+                        if (resolution != null) {
+                            issue.setResolutionId(resolution.getId());
+                        } else {
+                            throw new IllegalArgumentException("Unable to find resolution with name \"" + value + "\"");
+                        }
+                    }
+                    break;
+                case IssueFieldConstants.STATUS:
+                    if (value == null) {
+                        issue.setStatusObject(null);
+                    } else if (value instanceof Status) {
+                        issue.setStatusId(((Status) value).getId());
+                    } else {
+                        Status status = ComponentAccessor.getConstantsManager().getStatusByName(value.toString());
+
+                        if (status != null) {
+                            issue.setStatusObject(status);
+                        } else {
+                            throw new IllegalArgumentException("Unable to find status with name \"" + value + "\"");
+                        }
+                    }
+                    break;
+                case IssueFieldConstants.SECURITY:
+                    if (value == null) {
+                        issue.setSecurityLevelId(null);
+                    } else if (value instanceof Long) {
+                        issue.setSecurityLevelId((Long) value);
+                    } else {
+                        Collection<IssueSecurityLevel> levels;
+                        levels = issueSecurityLevelManager.getIssueSecurityLevelsByName(value.toString());
+
+                        if (levels == null) {
+                            throw new IllegalArgumentException("Unable to find security level \"" + value + "\"");
+                        }
+
+                        if (levels.size() > 1) {
+                            throw new IllegalArgumentException("More that one security level with name \"" + value + "\"");
+                        }
+
+                        issue.setSecurityLevelId(levels.iterator().next().getId());
+                    }
+                    break;
+                case IssueFieldConstants.ASSIGNEE: {
+                    ApplicationUser user = convertValueToUser(value);
+                    issue.setAssignee(user);
+                    break;
+                }
+                case IssueFieldConstants.DUE_DATE:
+                    if (value == null) {
+                        issue.setDueDate(null);
+                    }
+
+                    if (value instanceof Timestamp) {
+                        issue.setDueDate((Timestamp) value);
+                    } else if (value instanceof String) {
+                        SimpleDateFormat formatter = new SimpleDateFormat(
+                                applicationProperties.getDefaultString(APKeys.JIRA_DATE_TIME_PICKER_JAVA_FORMAT)
+                        );
+
+                        try {
+                            Date date = formatter.parse((String) value);
+
+                            if (date != null) {
+                                issue.setDueDate(new Timestamp(date.getTime()));
+                            } else {
+                                issue.setDueDate(null);
+                            }
+                        } catch (ParseException e) {
+                            throw new IllegalArgumentException("Wrong date format exception for \"" + value + "\"");
+                        }
+                    }
+                    break;
+                case IssueFieldConstants.REPORTER: {
+                    ApplicationUser user = convertValueToUser(value);
+                    issue.setReporter(user);
+                    break;
+                }
+                case IssueFieldConstants.SUMMARY:
+                    if ((value == null) || (value instanceof String)) {
+                        issue.setSummary((String) value);
+                    } else {
+                        issue.setSummary(value.toString());
+                    }
+                    break;
+                case IssueFieldConstants.DESCRIPTION:
+                    if ((value == null) || (value instanceof String)) {
+                        issue.setDescription((String) value);
+                    } else {
+                        issue.setDescription(convertToString(value));
+//                    issue.setDescription(value.toString());
+                    }
+                    break;
+                case IssueFieldConstants.ENVIRONMENT:
+                    if ((value == null) || (value instanceof String)) {
+                        issue.setEnvironment((String) value);
+                    } else {
+                        issue.setEnvironment(value.toString());
+                    }
+                    break;
+                case IssueFieldConstants.WATCHES:
+                    if (value == null) {
+                        clearWatchers(issue);
+                    } else if (value instanceof Collection) {
+                        Collection collection = (Collection) value;
+                        if (collection.size() == 0) {
+                            clearWatchers(issue);
+                        } else if (collection.iterator().next() instanceof ApplicationUser) {
+                            clearWatchers(issue);
+                            for (Object o : collection) {
+                                watcherManager.startWatching((ApplicationUser) o, issue);
+                            }
+                        } else {
+                            throw new UnsupportedOperationException("Data not supported for copy into watchers.");
+                        }
+                    } else if (value instanceof ApplicationUser) {
+                        clearWatchers(issue);
+                        watcherManager.startWatching((ApplicationUser) value, issue);
+                    } else {
+                        throw new UnsupportedOperationException("Not implemented");
+                    }
+                    break;
+                case IssueFieldConstants.LABELS:
+                    Set<String> set = convertToSetForLabels(value);
+                    labelManager.setLabels(currentUser, issue.getId(), set, false, true);
+                    break;
+                default:
+                    log.error("Issue field \"" + fieldId + "\" is not supported for setting.");
+                    break;
             }
         }
     }
@@ -912,13 +966,13 @@ public class WorkflowUtils {
         if (value == null) {
             return Collections.emptySet();
         } else if (value instanceof Version) {
-            return (Arrays.asList((Version) value));
+            return (Collections.singletonList((Version) value));
         } else if (value instanceof Collection) {
             return (Collection<Version>) value;
         } else {
             Version v = versionManager.getVersion(issue.getProjectObject().getId(), convertToString(value));
             if (v != null) {
-                return Arrays.asList(v);
+                return Collections.singletonList(v);
             }
             throw new IllegalArgumentException("Wrong version value '" + value + "'.");
         }

@@ -60,7 +60,7 @@ public class TransitionsSummaryTabPanel implements IssueTabPanel {
                 this.beanFactory.getInstance(remoteUser).getText("transitions-summary-view.not_yet_executed"));
             retList.add(action);
         } else {
-            Collections.sort(transitions, new TransitionSummaryComparator());
+            transitions.sort(new TransitionSummaryComparator());
 
             retList.add(new TransitionSummaryAction(transitions, descriptor, userManager));
         }

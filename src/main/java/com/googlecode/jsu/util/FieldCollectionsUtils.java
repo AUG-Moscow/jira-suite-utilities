@@ -109,7 +109,7 @@ public class FieldCollectionsUtils {
      * @return a list with fields sorted by name.
      */
     public List<Field> sortFields(List<Field> allFields) {
-        Collections.sort(allFields, getComparator());
+        allFields.sort(getComparator());
 
         return allFields;
     }

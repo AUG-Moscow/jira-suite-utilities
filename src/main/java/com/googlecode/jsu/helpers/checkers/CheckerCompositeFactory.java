@@ -34,11 +34,7 @@ public class CheckerCompositeFactory {
 
         try {
             instance = (T) Class.forName(className).newInstance();
-        } catch (InstantiationException e) {
-            log.error("Unable to initialize class [" + className + "]", e);
-        } catch (IllegalAccessException e) {
-            log.error("Unable to initialize class [" + className + "]", e);
-        } catch (ClassNotFoundException e) {
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
             log.error("Unable to initialize class [" + className + "]", e);
         }
 

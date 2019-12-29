@@ -45,9 +45,7 @@ public class MapFieldProcessor extends AbstractVisitor {
             field.setAccessible(true);
             field.set(source, values.get(fieldName));
             field.setAccessible(access);
-        } catch (IllegalArgumentException e) {
-            log.error("Unable to set class field - " + fieldName, e);
-        } catch (IllegalAccessException e) {
+        } catch (IllegalArgumentException | IllegalAccessException e) {
             log.error("Unable to set class field - " + fieldName, e);
         }
     }
@@ -59,15 +57,11 @@ public class MapFieldProcessor extends AbstractVisitor {
             Method valueMethod = annotation.getClass().getDeclaredMethod("value", new Class[] {});
 
             result = (String) valueMethod.invoke(annotation, new Object[] {});
-        } catch (SecurityException e) {
-            // Everything ok
-        } catch (NoSuchMethodException e) {
-            // Everything ok
-        } catch (IllegalArgumentException e) {
-            // Everything ok
-        } catch (IllegalAccessException e) {
-            // Everything ok
-        } catch (InvocationTargetException e) {
+        } catch (SecurityException |
+                NoSuchMethodException |
+                InvocationTargetException |
+                IllegalAccessException |
+                IllegalArgumentException e) {
             // Everything ok
         }
 
