@@ -21,81 +21,42 @@
         <context>atl.general</context>
     </web-resource>
 
-    <!-- Custom Fields -->
-    <customfield-type key="locationtextfield"
-                      class="com.googlecode.jsu.customfields.LocationTextCFType"
-                      i18n-name-key="customfield-type.locationtextfield.name">
+    <!-- Components -->
+    <component key="conditionCheckerFactory"
+               class="com.googlecode.jsu.helpers.ConditionCheckerFactory"
+               public="true"
+               i18n-name-key="component.conditioncheckerfactory.name">
 
-        <description key="customfield-type.locationtextfield.description"/>
+        <description key="component.conditioncheckerfactory.description">Provide service for checking conditions.</description>
+        <interface>com.googlecode.jsu.helpers.ConditionCheckerFactory</interface>
+    </component>
 
-        <resource type="velocity" name="view" location="templates/jira/fields/view/view-location.vm"/>
-        <resource type="velocity" name="edit" location="templates/plugins/fields/edit/edit-maxlengthtext.vm"/>
-        <resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-basictext.vm"/>
-        <resource type="velocity" name="column-view" location="templates/plugins/fields/view/view-basictext.vm"/>
-    </customfield-type>
+    <component key="fieldCollectionsUtils"
+               class="com.googlecode.jsu.util.FieldCollectionsUtils"
+               public="false"
+               i18n-name-key="component.fieldcollectionsutils.name">
 
-    <customfield-type key="locationselect"
-                      i18n-name-key="customfield-type.locationselect.name"
-                      class="com.googlecode.jsu.customfields.LocationSelectCFType">
+        <description key="component.fieldcollectionsutils.description">This utils class exposes common methods to get field collections.</description>
+        <interface>com.googlecode.jsu.util.FieldCollectionsUtils</interface>
+    </component>
 
-        <description key="customfield-type.locationselect.description"/>
+    <component key="transitionsManager"
+               class="com.googlecode.jsu.transitionssummary.TransitionsManager"
+               public="true"
+               i18n-name-key="component.transitionsmanager.name">
 
-        <resource type="velocity" name="view" location="templates/jira/fields/view/view-location.vm"/>
-        <resource type="velocity" name="edit" location="templates/plugins/fields/edit/edit-select.vm"/>
-        <resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-basictext.vm"/>
-        <resource type="velocity" name="column-view" location="templates/plugins/fields/view/view-basictext.vm"/>
-    </customfield-type>
+        <description key="component.transitionsmanager.description">Generate statistics information about transitions.</description>
+        <interface>com.googlecode.jsu.transitionssummary.TransitionsManager</interface>
+    </component>
 
-    <customfield-type key="directionsfield"
-                      class="com.googlecode.jsu.customfields.DirectionsCFType"
-                      i18n-name-key="customfield-type.directionsfield.name">
-        <description key="customfield-type.directionsfield.description"/>
+    <component key="workflowUtils"
+               class="com.googlecode.jsu.util.WorkflowUtils"
+               public="true"
+               i18n-name-key="component.workflowutils.name">
 
-        <resource type="velocity" name="view" location="templates/jira/fields/view/view-directions.vm"/>
-        <resource type="velocity" name="edit" location="templates/plugins/fields/edit/edit-maxlengthtext.vm"/>
-        <resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-basictext.vm"/>
-        <resource type="velocity" name="column-view" location="templates/plugins/fields/view/view-basictext.vm"/>
-    </customfield-type>
-
-    <customfield-type key="timeinsourcestatus"
-                      class="com.googlecode.jsu.customfields.TimeInSourceStatusCFType"
-                      i18n-name-key="customfield-type.timeinsourcestatus.name"
-                      state="disabled">
-
-        <description key="customfield-type.timeinsourcestatus.description"/>
-
-        <resource type="velocity" name="view" location="templates/jira/fields/view/view-timeinsourcestatus.vm"/>
-        <resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-basictext.vm"/>
-        <resource type="velocity" name="column-view" location="templates/plugins/fields/view/view-basictext.vm"/>
-    </customfield-type>
-
-    <!-- Searchers -->
-    <customfield-searcher key="textsearcher" name="Free Text Searcher"
-                          i18n-name-key="admin.customfield.searcher.textsearcher.name"
-                          class="com.atlassian.jira.issue.customfields.searchers.TextSearcher">
-        <description key="admin.customfield.searcher.textsearcher.desc">Search for values using a free text search.</description>
-
-        <resource type="velocity" name="search" location="templates/plugins/fields/edit-searcher/search-basictext.vm"/>
-        <resource type="velocity" name="view" location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm"/>
-
-        <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="locationtextfield"/>
-        <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="directionsfield"/>
-        <!--
-        <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="timeinsourcestatus"/>
-        -->
-    </customfield-searcher>
-
-    <customfield-searcher key="locationselectsearcher" name="Select List Searcher"
-                          i18n-name-key="admin.customfield.searcher.selectsearcher.name"
-                          class="com.googlecode.jsu.customfields.LocationSelectSearcher">
-        <description key="admin.customfield.searcher.selectsearcher.desc">Search for values using a select list.</description>
-
-        <resource type="velocity" name="search" location="templates/plugins/fields/edit-searcher/search-select.vm"/>
-        <resource type="velocity" name="view" location="templates/plugins/fields/view-searcher/view-searcher-select.vm"/>
-        <resource type="velocity" name="label" location="templates/plugins/fields/view-searcher/label-searcher-htmltext.vm"/>
-
-        <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="locationselect"/>
-    </customfield-searcher>
+        <description key="component.workflowutils.description">Workflow utils component.</description>
+        <interface>com.googlecode.jsu.util.WorkflowUtils</interface>
+    </component>
 
     <!-- Conditions -->
     <workflow-condition key="userIsInAnyGroups-condition"
@@ -336,42 +297,5 @@
 
         <supports-ajax-load>true</supports-ajax-load>
     </issue-tabpanel>
-
-    <!-- Components -->
-    <component key="conditionCheckerFactory"
-               class="com.googlecode.jsu.helpers.ConditionCheckerFactory"
-               interface="com.googlecode.jsu.helpers.ConditionCheckerFactory"
-               public="true"
-               i18n-name-key="component.conditioncheckerfactory.name">
-
-        <description key="component.conditioncheckerfactory.description">Provide service for checking conditions.</description>
-    </component>
-
-    <component key="fieldCollectionsUtils"
-               class="com.googlecode.jsu.util.FieldCollectionsUtils"
-               interface="com.googlecode.jsu.util.FieldCollectionsUtils"
-               public="false"
-               i18n-name-key="component.fieldcollectionsutils.name">
-
-        <description key="component.fieldcollectionsutils.description">This utils class exposes common methods to get field collections.</description>
-    </component>
-
-    <component key="transitionsManager"
-               class="com.googlecode.jsu.transitionssummary.TransitionsManager"
-               interface="com.googlecode.jsu.transitionssummary.TransitionsManager"
-               public="true"
-               i18n-name-key="component.transitionsmanager.name">
-
-        <description key="component.transitionsmanager.description">Generate statistics information about transitions.</description>
-    </component>
-
-    <component key="workflowUtils"
-               class="com.googlecode.jsu.util.WorkflowUtils"
-               interface="com.googlecode.jsu.util.WorkflowUtils"
-               public="true"
-               i18n-name-key="component.workflowutils.name">
-
-        <description key="component.workflowutils.description">Workflow utils component.</description>
-    </component>
 
 </atlassian-plugin>

@@ -9,11 +9,26 @@ import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.config.PriorityManager;
 import com.atlassian.jira.config.properties.APKeys;
 import com.atlassian.jira.config.properties.ApplicationProperties;
-import com.atlassian.jira.issue.*;
+import com.atlassian.jira.issue.Issue;
+import com.atlassian.jira.issue.IssueConstant;
+import com.atlassian.jira.issue.IssueFieldConstants;
+import com.atlassian.jira.issue.IssueManager;
+import com.atlassian.jira.issue.IssueRelationConstants;
+import com.atlassian.jira.issue.ModifiedValue;
+import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.customfields.CustomFieldType;
 import com.atlassian.jira.issue.customfields.MultipleCustomFieldType;
 import com.atlassian.jira.issue.customfields.MultipleSettableCustomFieldType;
-import com.atlassian.jira.issue.customfields.impl.*;
+import com.atlassian.jira.issue.customfields.impl.AbstractMultiCFType;
+import com.atlassian.jira.issue.customfields.impl.CascadingSelectCFType;
+import com.atlassian.jira.issue.customfields.impl.GenericTextCFType;
+import com.atlassian.jira.issue.customfields.impl.LabelsCFType;
+import com.atlassian.jira.issue.customfields.impl.MultiSelectCFType;
+import com.atlassian.jira.issue.customfields.impl.MultiUserCFType;
+import com.atlassian.jira.issue.customfields.impl.ProjectCFType;
+import com.atlassian.jira.issue.customfields.impl.SelectCFType;
+import com.atlassian.jira.issue.customfields.impl.UserCFType;
+import com.atlassian.jira.issue.customfields.impl.VersionCFType;
 import com.atlassian.jira.issue.customfields.manager.OptionsManager;
 import com.atlassian.jira.issue.customfields.option.Option;
 import com.atlassian.jira.issue.customfields.option.Options;
@@ -50,17 +65,29 @@ import com.googlecode.jsu.helpers.checkers.ConverterString;
 import com.opensymphony.workflow.loader.AbstractDescriptor;
 import com.opensymphony.workflow.loader.ActionDescriptor;
 import com.opensymphony.workflow.loader.FunctionDescriptor;
-import org.apache.commons.lang.StringUtils;
-import org.ofbiz.core.entity.GenericEntityException;
-import org.ofbiz.core.entity.GenericValue;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.StringTokenizer;
+
+import org.apache.commons.lang.StringUtils;
+import org.ofbiz.core.entity.GenericEntityException;
+import org.ofbiz.core.entity.GenericValue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 //import com.opensymphony.user.Entity;
 
@@ -232,7 +259,7 @@ public class WorkflowUtils {
                         }
                     }
                 } else {
-                    retVal = value; 
+                    retVal = value;
                 }
 
                 if (log.isDebugEnabled()) {
@@ -459,7 +486,7 @@ public class WorkflowUtils {
                     newValue = userList;
                 } else if (cfType instanceof LabelsCFType) {
                     Set<String> set = convertToSetForLabels((String) newValue);
-                    this.labelManager.setLabels(convertApplicationUserToCrowdEmbeddedUser(currentUser),issue.getId(),customField.getIdAsLong(),set,false,true);
+                    this.labelManager.setLabels(currentUser,issue.getId(),customField.getIdAsLong(),set,false,true);
                 } else {
                     //convert from string to Object
                     CustomFieldParams fieldParams = new CustomFieldParamsImpl(customField, newValue);
@@ -474,7 +501,7 @@ public class WorkflowUtils {
                     for(Object o:(Collection)newValue) {
                         set.add(o.toString());
                     }
-                    this.labelManager.setLabels(convertApplicationUserToCrowdEmbeddedUser(currentUser),issue.getId(),customField.getIdAsLong(),set,false,true);
+                    this.labelManager.setLabels(currentUser,issue.getId(),customField.getIdAsLong(),set,false,true);
                 } else {
                     //convert from string to Object
                     CustomFieldParams fieldParams = new CustomFieldParamsImpl(customField,convertToString(newValue));
@@ -485,10 +512,10 @@ public class WorkflowUtils {
                 newValue = convertValueToUser(newValue);
             } else if (cfType instanceof LabelsCFType) {
                 if (newValue == null) {
-                    this.labelManager.setLabels(convertApplicationUserToCrowdEmbeddedUser(currentUser),issue.getId(),customField.getIdAsLong(),new HashSet<String>(),false,true);
+                    this.labelManager.setLabels(currentUser,issue.getId(),customField.getIdAsLong(),new HashSet<String>(),false,true);
               }else{
                     Set<String> set = convertToSetForLabels(value);
-                    this.labelManager.setLabels(convertApplicationUserToCrowdEmbeddedUser(currentUser),issue.getId(),customField.getIdAsLong(),set,false,true);
+                    this.labelManager.setLabels(currentUser,issue.getId(),customField.getIdAsLong(),set,false,true);
                 }
 
             } else if (cfType instanceof AbstractMultiCFType) {
@@ -576,7 +603,7 @@ public class WorkflowUtils {
                 //				}
             } else if (fieldId.equals(IssueFieldConstants.COMPONENTS)) {
                 Collection<ProjectComponent> components = convertValueToComponents(issue, value);
-                issue.setComponentObjects(components);
+                issue.setComponent(components);
             } else if (fieldId.equals(IssueFieldConstants.FIX_FOR_VERSIONS)) {
                 Collection<Version> versions = convertValueToVersions(issue, value);
                 issue.setFixVersions(versions);
@@ -682,7 +709,7 @@ public class WorkflowUtils {
                     issue.setSecurityLevelId(levels.iterator().next().getId());
                 }
             } else if (fieldId.equals(IssueFieldConstants.ASSIGNEE)) {
-                User user = convertApplicationUserToCrowdEmbeddedUser(convertValueToUser(value));
+                ApplicationUser user = convertValueToUser(value);
                 issue.setAssignee(user);
             } else if (fieldId.equals(IssueFieldConstants.DUE_DATE)) {
                 if (value == null) {
@@ -709,7 +736,7 @@ public class WorkflowUtils {
                     }
                 }
             } else if (fieldId.equals(IssueFieldConstants.REPORTER)) {
-                User user =  convertApplicationUserToCrowdEmbeddedUser(convertValueToUser(value));
+                ApplicationUser user =  convertValueToUser(value);
                 issue.setReporter(user);
             } else if (fieldId.equals(IssueFieldConstants.SUMMARY)) {
                 if ((value == null) || (value instanceof String)) {
@@ -753,7 +780,7 @@ public class WorkflowUtils {
                 }
             } else if (fieldId.equals(IssueFieldConstants.LABELS)) {
                 Set<String> set = convertToSetForLabels(value);
-                labelManager.setLabels(convertApplicationUserToCrowdEmbeddedUser(currentUser), issue.getId(), set,false,true);
+                labelManager.setLabels(currentUser, issue.getId(), set,false,true);
             } else {
                 log.error("Issue field \"" + fieldId + "\" is not supported for setting.");
             }
@@ -815,7 +842,7 @@ public class WorkflowUtils {
                 object = convertToString(object);
                 resultList.add(object);
             }
-            return StringUtils.join((Collection<?>) resultList, ",");
+            return StringUtils.join(resultList, ",");
         } else {
             return CONVERTER_STRING.convert(value);
         }
@@ -997,16 +1024,6 @@ public class WorkflowUtils {
             map.put(CascadingSelectCFType.PARENT_KEY, option);
         }
         return map;
-    }
-
-
-    /**
-     *This is deprecated because Atlassian API is not working with ApplicationUser
-     * As soon as this is working this method can be deleted
-     */
-    @Deprecated
-    private User convertApplicationUserToCrowdEmbeddedUser(ApplicationUser applicationUser){
-        return applicationUser == null ? null : applicationUser.getDirectoryUser();
     }
 
     private <T> ArrayList<T> asArrayList(T value) {

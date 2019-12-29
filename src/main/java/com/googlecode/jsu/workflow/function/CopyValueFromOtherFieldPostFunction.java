@@ -1,11 +1,7 @@
 package com.googlecode.jsu.workflow.function;
 
 
-import static com.googlecode.jsu.workflow.WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory.PARAM_SOURCE_FIELD;
-import static com.googlecode.jsu.workflow.WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory.PARAM_DEST_FIELD;
-import static com.googlecode.jsu.workflow.WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory.PARAM_COPY_TYPE;
-
-import java.util.Map;
+import static com.googlecode.jsu.workflow.WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory.*;
 
 import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.MutableIssue;
@@ -16,6 +12,8 @@ import com.atlassian.jira.util.I18nHelper;
 import com.googlecode.jsu.util.WorkflowUtils;
 import com.opensymphony.module.propertyset.PropertySet;
 import com.opensymphony.workflow.WorkflowException;
+
+import java.util.Map;
 
 /**
  * @author Gustavo Martin
@@ -91,7 +89,7 @@ public class CopyValueFromOtherFieldPostFunction extends AbstractPreserveChanges
             }
         } catch (Exception e) {
             I18nHelper i18nh = this.beanFactory.getInstance(
-                    ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser());
+                    ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser());
             String message = i18nh.getText("copyvaluefromfield-function-view.unable_to_copy",fieldFromName,fieldToName);
             log.error(message, e);
             throw new WorkflowException(message);

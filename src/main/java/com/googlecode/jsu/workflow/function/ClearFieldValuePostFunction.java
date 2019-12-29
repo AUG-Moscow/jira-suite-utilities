@@ -1,7 +1,5 @@
 package com.googlecode.jsu.workflow.function;
 
-import java.util.Map;
-
 import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.issue.MutableIssue;
 import com.atlassian.jira.issue.fields.Field;
@@ -12,6 +10,8 @@ import com.googlecode.jsu.util.WorkflowUtils;
 import com.googlecode.jsu.workflow.WorkflowClearFieldValueFunctionPluginFactory;
 import com.opensymphony.module.propertyset.PropertySet;
 import com.opensymphony.workflow.WorkflowException;
+
+import java.util.Map;
 
 /**
  * This function clears field value.
@@ -55,7 +55,7 @@ public class ClearFieldValuePostFunction extends AbstractPreserveChangesPostFunc
             workflowUtils.setFieldValue(currentUser, issue, fieldKey, null, holder);
         } catch (Exception e) {
             I18nHelper i18nh = this.beanFactory.getInstance(
-                    ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser());
+                    ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser());
             String message = i18nh.getText("clearfieldvalue-function-view.unable_to_purge",fieldKey,fieldName);
 
             log.error(message, e);

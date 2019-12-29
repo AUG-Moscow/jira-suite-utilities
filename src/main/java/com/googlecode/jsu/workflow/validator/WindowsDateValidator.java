@@ -72,7 +72,7 @@ public class WindowsDateValidator extends GenericValidator {
         Object objDate2 = workflowUtils.getFieldValueFromIssue(getIssue(), fldDate2);
 
         I18nHelper i18nh = this.beanFactory.getInstance(
-                ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser());
+                ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser());
 
         if ((objDate1 != null) && (objDate2 != null)) {
             // It Takes the Locale for inicialize dates.

@@ -34,6 +34,7 @@ public abstract class AbstractDateCompareValidator extends GenericValidator {
         this.beanFactory = beanFactory;
     }
 
+    @Override
     protected abstract void validate() throws InvalidInputException, WorkflowException;
 
     /**
@@ -46,7 +47,7 @@ public abstract class AbstractDateCompareValidator extends GenericValidator {
 
         if (fieldCollectionsUtils.isFieldRequired(issue, fldDate)) {
             String msg = this.beanFactory.getInstance(
-                    ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser())
+                    ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser())
                     .getText("datecompare-validator-view.is_required", fldDate.getName());
             this.setExceptionMessage(
                     fldDate,
@@ -64,7 +65,7 @@ public abstract class AbstractDateCompareValidator extends GenericValidator {
      */
     protected void invalidExpression(Field dateField, String expression) {
         String msg = this.beanFactory.getInstance(
-                ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser())
+                ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser())
                 .getText("dateexpressioncompare-validator-view.is_invalid", expression);
         this.setExceptionMessage(
                 dateField,
@@ -77,7 +78,7 @@ public abstract class AbstractDateCompareValidator extends GenericValidator {
             Field field, Object fieldValue
     ) {
         String msg = this.beanFactory.getInstance(
-                ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser())
+                ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser())
                 .getText("datecompare-validator-view.not_a_date",field.getName(),fieldValue.toString());
         this.setExceptionMessage(
                 field,
@@ -126,7 +127,7 @@ public abstract class AbstractDateCompareValidator extends GenericValidator {
         }
 
         I18nHelper i18nh = this.beanFactory.getInstance(
-                ComponentAccessor.getJiraAuthenticationContext().getUser().getDirectoryUser());
+                ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser());
         String msg = i18nh.getText("datecompare-validator-view.is_not",
                 field1.getName(),i18nh.getText(condition.getDisplayTextKey()),nameOrValue==null?"":nameOrValue,errorMsg);
 
