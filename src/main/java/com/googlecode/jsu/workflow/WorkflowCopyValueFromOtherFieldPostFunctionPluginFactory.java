@@ -83,7 +83,7 @@ public class WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory extends Ab
      * @see com.googlecode.jsu.workflow.WorkflowPluginFactory#getDescriptorParams(java.util.Map)
      */
     public Map<String, ?> getDescriptorParams(Map<String, Object> conditionParams) {
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> params = new HashMap<>();
 
         try{
             String sourceField = extractSingleParam(conditionParams, "sourceFieldsList");

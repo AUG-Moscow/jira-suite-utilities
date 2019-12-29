@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>${i18n.getText("configuration.title")}</title>
+    <meta name="decorator" content="atl.admin"/>
+    <meta name="admin.active.section" content="admin_system_menu/top_system_section/jsu_section"/>
+    <meta name="admin.active.tab" content="jsu_configuration"/>
+</head>
+
+<body>
+<h2>${i18n.getText("configuration.title")}</h2>
+<!-- description -->
+
+<form id="jsuconfig" class="aui" method="post" action="${req.contextPath}/secure/admin/JSUConfiguration.jspa">
+    <div class="form-body">
+        <div class="field-group" style="padding-left: 165px;">
+            <label for="google-maps-api-key" style="width: 150px; margin-left: -165px;">${i18n.getText(
+                "configuration.google-maps-api-key.label")}</label>
+            <input id="google-maps-api-key" type="text" name="googleMapsApiKey" class="text"
+                   value="$textutils.htmlEncode(${googleMapsApiKey})" style="max-width: 380px;"/>
+            <div class="description">${i18n.getText("configuration.google-maps.api-key.descr")}</div>
+        </div>
+    </div>
+
+    <div class="buttons-container form-footer" style="padding-left: 165px;">
+        <div class="buttons">
+            <input type="submit" name="config" value="${i18n.getText("configuration.save.button")}" accesskey="s"
+                   title="Press Alt+s to submit form" class="aui-button aui-button-primary">
+        </div>
+    </div>
+</form>
+
+    #if (${saved})
+    <div class="aui-message aui-message-generic generic">
+        <p class="title"><strong></strong></p>
+        Configuration change saved successfully.
+    </div>
+    #end
+</body>
+</html>

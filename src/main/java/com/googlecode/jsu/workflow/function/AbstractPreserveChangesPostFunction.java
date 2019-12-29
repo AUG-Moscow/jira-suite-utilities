@@ -65,7 +65,7 @@ abstract class AbstractPreserveChangesPostFunction extends AbstractJiraFunctionP
         List<ChangeItemBean> changeItems = (List<ChangeItemBean>) transientVars.get(CHANGE_ITEMS);
 
         if (changeItems == null) {
-            changeItems = new LinkedList<ChangeItemBean>();
+            changeItems = new LinkedList<>();
         }
 
         if (log.isDebugEnabled()) {

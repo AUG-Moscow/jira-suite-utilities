@@ -50,7 +50,7 @@ public class RegexpFieldValidator extends GenericValidator {
             Object objValue = workflowUtils.getFieldValueFromIssue(getIssue(), field);
 
             String completeValue = "";
-            ArrayList<String> list = new ArrayList<String>();
+            ArrayList<String> list = new ArrayList<>();
             if(objValue!=null) {
                 completeValue = objValue.toString();
                 if(objValue instanceof List) {

@@ -73,7 +73,7 @@ public class FieldCollectionsUtils {
      * @return a complete list of fields, including custom fields.
      */
     public List<Field> getAllFields() {
-        Set<Field> allFieldsSet = new TreeSet<Field>(getComparator());
+        Set<Field> allFieldsSet = new TreeSet<>(getComparator());
 
         allFieldsSet.addAll(fieldManager.getOrderableFields());
 
@@ -83,7 +83,7 @@ public class FieldCollectionsUtils {
             log.error("Unable to load navigable fields", e);
         }
 
-        return new ArrayList<Field>(allFieldsSet);
+        return new ArrayList<>(allFieldsSet);
     }
 
     /**
@@ -118,7 +118,7 @@ public class FieldCollectionsUtils {
      * @return a list of all fields of type date and datetime.
      */
     public List<Field> getAllDateFields() {
-        List<Field> allDateFields = new ArrayList<Field>();
+        List<Field> allDateFields = new ArrayList<>();
 
         List<CustomField> fields = customFieldManager.getCustomFieldObjects();
 
@@ -140,7 +140,7 @@ public class FieldCollectionsUtils {
     }
 
     public List<Field> getAllRegexpFields() {
-        List<Field> allRegexpFields = new ArrayList<Field>();
+        List<Field> allRegexpFields = new ArrayList<>();
 
         allRegexpFields.addAll(getAllTextFields());
         allRegexpFields.addAll(getAllSelectFields());
@@ -149,7 +149,7 @@ public class FieldCollectionsUtils {
     }
 
     public List<Field> getAllSelectFields() {
-        List<Field> allSelectFields = new ArrayList<Field>();
+        List<Field> allSelectFields = new ArrayList<>();
 
         List<CustomField> fields = customFieldManager.getCustomFieldObjects();
 
@@ -166,7 +166,7 @@ public class FieldCollectionsUtils {
     }
 
     public List<Field> getAllTextFields() {
-        List<Field> allTextFields = new ArrayList<Field>();
+        List<Field> allTextFields = new ArrayList<>();
 
         List<CustomField> fields = customFieldManager.getCustomFieldObjects();
 
@@ -304,7 +304,7 @@ public class FieldCollectionsUtils {
      * Transforms given list of fields into field containers.
      */
     public List<FieldContainer> getFieldContainers(List<Field> fields) {
-        ArrayList<FieldContainer> containers = new ArrayList<FieldContainer>();
+        ArrayList<FieldContainer> containers = new ArrayList<>();
         if(fields!=null) {
             for(Field field:fields) {
                 containers.add(new FieldContainer(field));
@@ -478,7 +478,7 @@ public class FieldCollectionsUtils {
      * Convert array of names into list of fields
      */
     private List<Field> asFields(String ... names) {
-        List<Field> result = new ArrayList<Field>(names.length);
+        List<Field> result = new ArrayList<>(names.length);
 
         for (String name : names) {
             result.add(fieldManager.getField(name));

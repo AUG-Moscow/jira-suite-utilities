@@ -65,7 +65,7 @@ public class WorkflowClearFieldValueFunctionPluginFactory
      */
     @SuppressWarnings("unchecked")
     public Map<String, String> getDescriptorParams(Map conditionParams) {
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> params = new HashMap<>();
 
         try{
             String sourceField = extractSingleParam(conditionParams, FIELD);

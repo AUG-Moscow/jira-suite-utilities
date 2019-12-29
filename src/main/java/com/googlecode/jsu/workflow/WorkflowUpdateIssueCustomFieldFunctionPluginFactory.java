@@ -36,7 +36,7 @@ public class WorkflowUpdateIssueCustomFieldFunctionPluginFactory extends
     }
 
     public Map getDescriptorParams(Map conditionParams) {
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> params = new HashMap<>();
 
         String fieldId = extractSingleParam(conditionParams, PARAM_FIELD_ID);
         params.put(TARGET_FIELD_NAME, fieldId);

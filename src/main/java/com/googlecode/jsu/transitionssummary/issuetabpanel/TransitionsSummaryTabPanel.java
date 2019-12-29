@@ -49,7 +49,7 @@ public class TransitionsSummaryTabPanel implements IssueTabPanel {
      * @see com.googlecode.jsu.issuetabpanel.IssueTabPanel#getActions(org.ofbiz.core.entity.GenericValue, com.opensymphony.user.User)
      */
     public List<com.atlassian.jira.plugin.issuetabpanel.IssueAction> getActions(Issue issue, ApplicationUser remoteUser) {
-        List<IssueAction> retList = new ArrayList<IssueAction>();
+        List<IssueAction> retList = new ArrayList<>();
         List<TransitionSummary> transitions = transitionsManager.getTransitionSummary(issue);
 
         // Allway adds only one record to the tab. This is thus, because if there are transition sumeries,

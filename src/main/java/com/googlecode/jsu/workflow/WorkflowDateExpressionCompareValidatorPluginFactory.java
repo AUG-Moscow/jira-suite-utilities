@@ -114,7 +114,7 @@ public class WorkflowDateExpressionCompareValidatorPluginFactory extends
      * @see com.googlecode.jsu.workflow.WorkflowPluginFactory#getDescriptorParams(java.util.Map)
      */
     public Map<String, ?> getDescriptorParams(Map<String, Object> validatorParams) {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
 
         try{
             String date = extractSingleParam(validatorParams, "dateFieldsList");

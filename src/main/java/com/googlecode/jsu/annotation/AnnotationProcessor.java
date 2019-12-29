@@ -9,7 +9,7 @@ import java.util.List;
  * @author <A href="mailto:abashev at gmail dot com">Alexey Abashev</A>
  */
 public class AnnotationProcessor {
-    private List<AbstractVisitor> visitors = new ArrayList<AbstractVisitor>();
+    private List<AbstractVisitor> visitors = new ArrayList<>();
 
     public void addVisitor(AbstractVisitor visitor) {
         this.visitors.add(visitor);

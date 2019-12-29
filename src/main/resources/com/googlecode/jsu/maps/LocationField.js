@@ -8,7 +8,7 @@
 
     function runMapsCallbacks() {
         var cb;
-        while (cb = mapsCallbacks.shift()) {
+        while (cb === mapsCallbacks.shift()) {
             cb();
         }
     }

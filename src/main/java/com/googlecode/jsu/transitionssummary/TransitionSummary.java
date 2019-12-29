@@ -23,7 +23,7 @@ public class TransitionSummary {
     private Long duration;
     private String lastUpdater;
     private Timestamp lastUpdate;
-    private List<Transition> transitions = new ArrayList<Transition>();
+    private List<Transition> transitions = new ArrayList<>();
     private DateTimeFormatter userFormatter;
 
     /**

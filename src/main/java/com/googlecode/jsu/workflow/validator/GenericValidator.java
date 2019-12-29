@@ -146,7 +146,7 @@ public abstract class GenericValidator implements Validator {
         if (vars.containsKey("descriptor") && vars.containsKey("actionId")) {
             WorkflowDescriptor workflowDescriptor = (WorkflowDescriptor) vars.get("descriptor");
             Integer actionId = (Integer) vars.get("actionId");
-            ActionDescriptor actionDescriptor = workflowDescriptor.getAction(actionId.intValue());
+            ActionDescriptor actionDescriptor = workflowDescriptor.getAction(actionId);
 
             return workflowUtils.getFieldScreen(actionDescriptor);
         } else {

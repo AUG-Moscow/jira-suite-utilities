@@ -10,17 +10,75 @@
         <param name="plugin-icon">com/googlecode/jsu/images/pluginIcon.png</param>
         <param name="plugin-logo">com/googlecode/jsu/images/pluginLogo.png</param>
         <param name="atlassian-data-center-compatible">true</param>
+        <param name="configure.url">/secure/admin/JSUConfiguration!default.jspa</param>
     </plugin-info>
 
     <resource type="i18n" name="i18n" location="com.googlecode.jsu.i18n"/>
-
     <web-resource key="common" i18n-name-key="web-resource.common.name">
         <description key="web-resource.common.description">Common resources</description>
         <resource type="download" name="LocationField.js" location="com/googlecode/jsu/maps/LocationField.js"/>
         <resource type="download" name="LocationField.css" location="com/googlecode/jsu/maps/LocationField.css"/>
         <context>atl.general</context>
     </web-resource>
+    <!-- Custom fields -->
+    <customfield-type key="locationtextfield" class="com.googlecode.jsu.customfields.LocationTextCFType"
+                      i18n-name-key="customfield-type.locationtextfield.name">
+        <description key="customfield-type.locationtextfield.description"/>
+        <resource type="velocity" name="view" location="templates/jira/fields/view/view-location.vm"/>
+        <resource type="velocity" name="edit" location="templates/plugins/fields/edit/edit-maxlengthtext.vm"/>
+        <resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-basictext.vm"/>
+        <resource type="velocity" name="column-view" location="templates/plugins/fields/view/view-basictext.vm"/>
+    </customfield-type>
 
+    <customfield-type key="locationselect" i18n-name-key="customfield-type.locationselect.name"
+                      class="com.googlecode.jsu.customfields.LocationSelectCFType">
+        <description key="customfield-type.locationselect.description"/>
+        <resource type="velocity" name="view" location="templates/jira/fields/view/view-location.vm"/>
+        <resource type="velocity" name="edit" location="templates/plugins/fields/edit/edit-select.vm"/>
+        <resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-basictext.vm"/>
+        <resource type="velocity" name="column-view" location="templates/plugins/fields/view/view-basictext.vm"/>
+    </customfield-type>
+
+    <customfield-type key="directionsfield" class="com.googlecode.jsu.customfields.DirectionsCFType"
+                      i18n-name-key="customfield-type.directionsfield.name">
+        <description key="customfield-type.directionsfield.description"/>
+        <resource type="velocity" name="view" location="templates/jira/fields/view/view-directions.vm"/>
+        <resource type="velocity" name="edit" location="templates/plugins/fields/edit/edit-maxlengthtext.vm"/>
+        <resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-basictext.vm"/>
+        <resource type="velocity" name="column-view" location="templates/plugins/fields/view/view-basictext.vm"/>
+    </customfield-type>
+
+    <customfield-type key="timeinsourcestatus" class="com.googlecode.jsu.customfields.TimeInSourceStatusCFType"
+                      i18n-name-key="customfield-type.timeinsourcestatus.name" state="disabled">
+        <description key="customfield-type.timeinsourcestatus.description"/>
+        <resource type="velocity" name="view" location="templates/jira/fields/view/view-timeinsourcestatus.vm"/>
+        <resource type="velocity" name="xml" location="templates/plugins/fields/xml/xml-basictext.vm"/>
+        <resource type="velocity" name="column-view" location="templates/plugins/fields/view/view-basictext.vm"/>
+    </customfield-type>
+    <!-- Searchers -->
+    <customfield-searcher key="textsearcher" name="Free Text Searcher"
+                          i18n-name-key="admin.customfield.searcher.textsearcher.name"
+                          class="com.googlecode.jsu.customfields.TextSearcher">
+        <description key="admin.customfield.searcher.textsearcher.desc">Search for values using a free text search.
+        </description>
+        <resource type="velocity" name="search" location="templates/plugins/fields/edit-searcher/search-basictext.vm"/>
+        <resource type="velocity" name="view"
+                  location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm"/>
+        <valid-customfield-type package="com.googlecode.jira-suite-utilities" key="locationtextfield"/>
+        <valid-customfield-type package="com.googlecode.jira-suite-utilities" key="directionsfield"/>
+    </customfield-searcher>
+    <customfield-searcher key="locationselectsearcher" name="Select List Searcher"
+                          i18n-name-key="admin.customfield.searcher.selectsearcher.name"
+                          class="com.googlecode.jsu.customfields.LocationSelectSearcher">
+        <description key="admin.customfield.searcher.selectsearcher.desc">Search for values using a select list.
+        </description>
+        <resource type="velocity" name="search" location="templates/plugins/fields/edit-searcher/search-select.vm"/>
+        <resource type="velocity" name="view"
+                  location="templates/plugins/fields/view-searcher/view-searcher-select.vm"/>
+        <resource type="velocity" name="label"
+                  location="templates/plugins/fields/view-searcher/label-searcher-htmltext.vm"/>
+        <valid-customfield-type package="com.googlecode.jira-suite-utilities" key="locationselect"/>
+    </customfield-searcher>
     <!-- Components -->
     <component key="conditionCheckerFactory"
                class="com.googlecode.jsu.helpers.ConditionCheckerFactory"
@@ -47,7 +105,6 @@
                class="com.googlecode.jsu.transitionssummary.TransitionsManager"
                public="true"
                i18n-name-key="component.transitionsmanager.name">
-
         <description key="component.transitionsmanager.description">Generate statistics information about transitions.
         </description>
         <interface>com.googlecode.jsu.transitionssummary.TransitionsManager</interface>
@@ -57,7 +114,6 @@
                class="com.googlecode.jsu.util.WorkflowUtils"
                public="true"
                i18n-name-key="component.workflowutils.name">
-
         <description key="component.workflowutils.description">Workflow utils component.</description>
         <interface>com.googlecode.jsu.util.WorkflowUtils</interface>
     </component>
@@ -67,11 +123,7 @@
                         i18n-name-key="workflow-condition.userisinanygroups-condition.name"
                         class="com.googlecode.jsu.workflow.WorkflowUserIsInAnyGroupsConditionPluginFactory">
         <description key="workflow-condition.userisinanygroups-condition.description"/>
-
-        <condition-class>
-            com.googlecode.jsu.workflow.condition.UserIsInAnyGroupsCondition
-        </condition-class>
-
+        <condition-class>com.googlecode.jsu.workflow.condition.UserIsInAnyGroupsCondition</condition-class>
         <resource type="velocity" name="view"
                   location="templates/jira/workflow/condition/userIsInAnyGroups-condition-view.vm"/>
         <resource type="velocity" name="input-parameters"
@@ -84,11 +136,7 @@
                         i18n-name-key="workflow-condition.userisinanyroles-condition.name"
                         class="com.googlecode.jsu.workflow.WorkflowUserIsInAnyRolesConditionPluginFactory">
         <description key="workflow-condition.userisinanyroles-condition.description"/>
-
-        <condition-class>
-            com.googlecode.jsu.workflow.condition.UserIsInAnyRolesCondition
-        </condition-class>
-
+        <condition-class>com.googlecode.jsu.workflow.condition.UserIsInAnyRolesCondition</condition-class>
         <resource type="velocity" name="view"
                   location="templates/jira/workflow/condition/userIsInAnyRoles-condition-view.vm"/>
         <resource type="velocity" name="input-parameters"
@@ -101,11 +149,7 @@
                         i18n-name-key="workflow-condition.valuefield-condition.name"
                         class="com.googlecode.jsu.workflow.WorkflowValueFieldConditionPluginFactory">
         <description key="workflow-condition.valuefield-condition.description"/>
-
-        <condition-class>
-            com.googlecode.jsu.workflow.condition.ValueFieldCondition
-        </condition-class>
-
+        <condition-class>com.googlecode.jsu.workflow.condition.ValueFieldCondition</condition-class>
         <resource type="velocity" name="view"
                   location="templates/jira/workflow/condition/fieldvalue-condition-view.vm"/>
         <resource type="velocity" name="input-parameters"
@@ -118,11 +162,7 @@
                         i18n-name-key="workflow-condition.userisincustomfield-condition.name"
                         class="com.googlecode.jsu.workflow.WorkflowUserIsInCustomFieldConditionPluginFactory">
         <description key="workflow-condition.userisincustomfield-condition.description"/>
-
-        <condition-class>
-            com.googlecode.jsu.workflow.condition.UserIsInCustomFieldCondition
-        </condition-class>
-
+        <condition-class>com.googlecode.jsu.workflow.condition.UserIsInCustomFieldCondition</condition-class>
         <resource type="velocity" name="view"
                   location="templates/jira/workflow/condition/UserIsInCustomField-Condition-view.vm"/>
         <resource type="velocity" name="input-parameters"
@@ -136,11 +176,7 @@
                         i18n-name-key="workflow-validator.datecompare-validator.name"
                         class="com.googlecode.jsu.workflow.WorkflowDateCompareValidatorPluginFactory">
         <description key="workflow-validator.datecompare-validator.description"/>
-
-        <validator-class>
-            com.googlecode.jsu.workflow.validator.DateCompareValidator
-        </validator-class>
-
+        <validator-class>com.googlecode.jsu.workflow.validator.DateCompareValidator</validator-class>
         <resource type="velocity" name="view"
                   location="templates/jira/workflow/validator/datecompare-validator-view.vm"/>
         <resource type="velocity" name="input-parameters"
@@ -153,11 +189,7 @@
                         i18n-name-key="workflow-validator.dateexpressioncompare-validator.name"
                         class="com.googlecode.jsu.workflow.WorkflowDateExpressionCompareValidatorPluginFactory">
         <description key="workflow-validator.dateexpressioncompare-validator.description"/>
-
-        <validator-class>
-            com.googlecode.jsu.workflow.validator.DateExpressionCompareValidator
-        </validator-class>
-
+        <validator-class>com.googlecode.jsu.workflow.validator.DateExpressionCompareValidator</validator-class>
         <resource type="velocity" name="view"
                   location="templates/jira/workflow/validator/dateexpressioncompare-validator-view.vm"/>
         <resource type="velocity" name="input-parameters"
@@ -170,11 +202,7 @@
                         i18n-name-key="workflow-validator.fieldsrequired-validator.name"
                         class="com.googlecode.jsu.workflow.WorkflowFieldsRequiredValidatorPluginFactory">
         <description key="workflow-validator.fieldsrequired-validator.description"/>
-
-        <validator-class>
-            com.googlecode.jsu.workflow.validator.FieldsRequiredValidator
-        </validator-class>
-
+        <validator-class>com.googlecode.jsu.workflow.validator.FieldsRequiredValidator</validator-class>
         <resource type="velocity" name="view"
                   location="templates/jira/workflow/validator/fieldsrequired-validator-view.vm"/>
         <resource type="velocity" name="input-parameters"
@@ -187,11 +215,7 @@
                         i18n-name-key="workflow-validator.regexpfield-validator.name"
                         class="com.googlecode.jsu.workflow.WorkflowRegexpFieldValidatorPluginFactory">
         <description key="workflow-validator.regexpfield-validator.description"/>
-
-        <validator-class>
-            com.googlecode.jsu.workflow.validator.RegexpFieldValidator
-        </validator-class>
-
+        <validator-class>com.googlecode.jsu.workflow.validator.RegexpFieldValidator</validator-class>
         <resource type="velocity" name="view"
                   location="templates/jira/workflow/validator/regexpfield-validator-view.vm"/>
         <resource type="velocity" name="input-parameters"
@@ -204,11 +228,7 @@
                         i18n-name-key="workflow-validator.windowsdate-validator.name"
                         class="com.googlecode.jsu.workflow.WorkflowWindowsDateValidatorPluginFactory">
         <description key="workflow-validator.windowsdate-validator.description"/>
-
-        <validator-class>
-            com.googlecode.jsu.workflow.validator.WindowsDateValidator
-        </validator-class>
-
+        <validator-class>com.googlecode.jsu.workflow.validator.WindowsDateValidator</validator-class>
         <resource type="velocity" name="view"
                   location="templates/jira/workflow/validator/windowsdate-validator-view.vm"/>
         <resource type="velocity" name="input-parameters"
@@ -222,16 +242,11 @@
                        i18n-name-key="workflow-function.copyvaluefromotherfield-function.name"
                        class="com.googlecode.jsu.workflow.WorkflowCopyValueFromOtherFieldPostFunctionPluginFactory">
         <description key="workflow-function.copyvaluefromotherfield-function.description"/>
-
-        <function-class>
-            com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction
-        </function-class>
-
+        <function-class>com.googlecode.jsu.workflow.function.CopyValueFromOtherFieldPostFunction</function-class>
         <orderable>true</orderable>
         <unique>false</unique>
         <deletable>true</deletable>
         <default>false</default>
-
         <resource type="velocity" name="view"
                   location="templates/jira/workflow/function/copyvaluefromfield-function-view.vm"/>
         <resource type="velocity" name="input-parameters"
@@ -244,15 +259,10 @@
                        i18n-name-key="workflow-function.updateissuecustomfield-function.name"
                        class="com.googlecode.jsu.workflow.WorkflowUpdateIssueCustomFieldFunctionPluginFactory">
         <description key="workflow-function.updateissuecustomfield-function.description"/>
-
-        <function-class>
-            com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction
-        </function-class>
-
+        <function-class>com.googlecode.jsu.workflow.function.UpdateIssueCustomFieldPostFunction</function-class>
         <orderable>true</orderable>
         <unique>false</unique>
         <deletable>true</deletable>
-
         <resource type="velocity" name="view"
                   location="templates/jira/workflow/function/updateissuefield-function-view.vm"/>
         <resource type="velocity" name="input-parameters"
@@ -265,15 +275,10 @@
                        i18n-name-key="workflow-function.clearfieldvalue-function.name"
                        class="com.googlecode.jsu.workflow.WorkflowClearFieldValueFunctionPluginFactory">
         <description key="workflow-function.clearfieldvalue-function.description"/>
-
-        <function-class>
-            com.googlecode.jsu.workflow.function.ClearFieldValuePostFunction
-        </function-class>
-
+        <function-class>com.googlecode.jsu.workflow.function.ClearFieldValuePostFunction</function-class>
         <orderable>true</orderable>
         <unique>false</unique>
         <deletable>true</deletable>
-
         <resource type="velocity" name="view"
                   location="templates/jira/workflow/function/clearfieldvalue-function-view.vm"/>
         <resource type="velocity" name="input-parameters"
@@ -287,19 +292,35 @@
     <!-- Portlets -->
 
     <!-- Issue Panels -->
-
     <issue-tabpanel key="transitions-summary-tabpanel"
                     i18n-name-key="issue-tabpanel.transitions-summary-tabpanel.name"
                     class="com.googlecode.jsu.transitionssummary.issuetabpanel.TransitionsSummaryTabPanel">
-
         <description key="issue-tabpanel.transitions-summary-tabpanel.description"/>
         <label key="transitions-summary-view.name"/>
-
         <resource type="velocity"
                   name="view"
                   location="templates/jira/issuetabpanel/transitionssummary/transitions-summary-view.vm"/>
-
         <supports-ajax-load>true</supports-ajax-load>
     </issue-tabpanel>
+    <!-- Web sections -->
+    <web-section key="jsu_section" name="JSU Section" location="admin_plugins_menu" weight="50">
+        <label key="menu.jsu.section.label"/>
+        <condition class="com.googlecode.jsu.conditions.UserIsAdminCondition"/>
+    </web-section>
+    <web-item key="jsu_configuration" name="JSU Configuration Link" section="admin_plugins_menu/jsu_section"
+              weight="10">
+        <label key="menu.jsu.configuration.label"/>
+        <link linkId="jsu_configuration">/secure/admin/JSUConfiguration!default.jspa</link>
+        <condition class="com.googlecode.jsu.conditions.UserIsAdminCondition"/>
+        <param name="webfragments.keywords">webfragments.keywords.jsu.configuration</param>
+    </web-item>
+    <webwork1 key="jsu" name="JSU Actions" class="java.lang.Object">
+        <actions>
+            <action name="com.googlecode.jsu.actions.ConfigurationAction" alias="JSUConfiguration"
+                    roles-required="admin">
+                <view name="input">templates/jira/actions/view/configuration.vm</view>
+            </action>
+        </actions>
+    </webwork1>
 
 </atlassian-plugin>

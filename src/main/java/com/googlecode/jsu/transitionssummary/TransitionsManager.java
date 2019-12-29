@@ -48,8 +48,8 @@ public class TransitionsManager {
             return Collections.emptyList();
         }
 
-        Map<String, TransitionSummary> summary = new TreeMap<String, TransitionSummary>();
-        List<TransitionSummary> retList = new ArrayList<TransitionSummary>();
+        Map<String, TransitionSummary> summary = new TreeMap<>();
+        List<TransitionSummary> retList = new ArrayList<>();
 
         for (Transition trans : statusChanges) {
             // Sets an ID for the Transition.
@@ -89,7 +89,7 @@ public class TransitionsManager {
      */
     private List<Transition> getStatusChanges(Issue issue, Timestamp tsCreated){
         @SuppressWarnings("unchecked")
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         params.put("issue",issue.getId());
         List<GenericValue> changeGroups = ofBizDelegator.findByAnd("ChangeGroup", params);
 
@@ -102,12 +102,12 @@ public class TransitionsManager {
             }
         );
 
-        List<Transition> retList = new ArrayList<Transition>();
+        List<Transition> retList = new ArrayList<>();
         Timestamp tsStartDate = new Timestamp(tsCreated.getTime());
 
         for (GenericValue changeGroup : changeGroups) {
             // Obtains all ChangeItems that contains an status change.
-            Map<String, Object> paramsItem = new HashMap<String, Object>();
+            Map<String, Object> paramsItem = new HashMap<>();
             paramsItem.put("group", changeGroup.getLong("id"));
             paramsItem.put("field", "status");
             paramsItem.put("fieldtype", "jira");

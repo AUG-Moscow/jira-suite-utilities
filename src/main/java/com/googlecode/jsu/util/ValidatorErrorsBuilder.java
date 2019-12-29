@@ -12,8 +12,8 @@ import com.opensymphony.workflow.InvalidInputException;
  * @author Alexey Abashev
  */
 public class ValidatorErrorsBuilder {
-    private List<Field> fields = new ArrayList<Field>();
-    private List<String> messages = new ArrayList<String>();
+    private List<Field> fields = new ArrayList<>();
+    private List<String> messages = new ArrayList<>();
     private boolean forScreen;
 
     /**

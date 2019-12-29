@@ -55,7 +55,7 @@ public class WorkflowUserIsInAnyRolesConditionPluginFactory extends
 
         Collection<ProjectRole> roles = projectRoleManager.getProjectRoles();
 
-        Collection<ProjectRole> availableRoles = new ArrayList<ProjectRole>();
+        Collection<ProjectRole> availableRoles = new ArrayList<>();
         //do not use remove or removeAll, does not work in OD for whatever reason
         for(ProjectRole r:roles) {
             if(!rolesSelected.contains(r)) {
@@ -87,7 +87,7 @@ public class WorkflowUserIsInAnyRolesConditionPluginFactory extends
      * @see com.googlecode.jsu.workflow.WorkflowPluginFactory#getDescriptorParams(java.util.Map)
      */
     public Map<String, ?> getDescriptorParams(Map<String, Object> conditionParams) {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
 
         try {
             String strRolesSelected = extractSingleParam(conditionParams, "hidRolesList");

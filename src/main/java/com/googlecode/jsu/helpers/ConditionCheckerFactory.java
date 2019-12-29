@@ -81,7 +81,7 @@ public class ConditionCheckerFactory {
      * Get all possible condition types.
      */
     public List<ConditionType> getConditionTypes() {
-        return new ArrayList<ConditionType>(CONDITIONS_CACHE.values());
+        return new ArrayList<>(CONDITIONS_CACHE.values());
     }
 
     /**
@@ -89,7 +89,7 @@ public class ConditionCheckerFactory {
      */
     public List<ComparisonType> getComparisonTypes() {
 
-        List<ComparisonType> comparisonTypes = new ArrayList<ComparisonType>(COMPARISONS_CACHE.values());
+        List<ComparisonType> comparisonTypes = new ArrayList<>(COMPARISONS_CACHE.values());
         return comparisonTypes;
     }
 

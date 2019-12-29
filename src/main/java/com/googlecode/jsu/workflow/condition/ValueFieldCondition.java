@@ -136,7 +136,7 @@ public class ValueFieldCondition extends AbstractJiraCondition {
         } else  if(fieldValue instanceof Status) {
             return ((Status)fieldValue).getId();
         } else if(fieldValue instanceof Collection) {
-            ArrayList<String> al = new ArrayList<String>();
+            ArrayList<String> al = new ArrayList<>();
             for(Object v:(Collection)fieldValue) {
                 if(v instanceof LazyLoadedOption) {
                     al.add(((LazyLoadedOption)v).getOptionId().toString());

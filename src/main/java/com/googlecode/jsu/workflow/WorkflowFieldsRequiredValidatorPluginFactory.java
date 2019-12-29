@@ -90,7 +90,7 @@ public class WorkflowFieldsRequiredValidatorPluginFactory
      * @see com.googlecode.jsu.workflow.WorkflowPluginFactory#getDescriptorParams(java.util.Map)
      */
     public Map<String, ?> getDescriptorParams(Map<String, Object> validatorParams) {
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> params = new HashMap<>();
         String strFieldsSelected = extractSingleParam(validatorParams, SELECTED_FIELDS);
         String contextHandling = null;
         if(validatorParams.containsKey(CONTEXT_HANDLING)) {

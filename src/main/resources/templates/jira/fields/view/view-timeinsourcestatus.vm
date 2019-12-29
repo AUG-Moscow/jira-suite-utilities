@@ -1,4 +1,4 @@
-#if ($value)
+#if (${value})
     #disable_html_escaping()
     $value.getFormatted()
 #end

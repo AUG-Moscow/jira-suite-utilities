@@ -431,7 +431,7 @@ public class WorkflowUtils {
                 newValue = dateFormat.format(value);
             } else if (value instanceof Option && cfType instanceof CascadingSelectCFType) {
                 Option option = (Option)value;
-                HashMap<String, Option> entries = new HashMap<String, Option>();
+                HashMap<String, Option> entries = new HashMap<>();
                 entries.put(null,option.getParentOption());
                 entries.put("1",option);
                 newValue = entries;
@@ -473,7 +473,7 @@ public class WorkflowUtils {
                     }
                 } else if(cfType instanceof MultiUserCFType) {
                     StringTokenizer st = new StringTokenizer((String)newValue,",");
-                    ArrayList<ApplicationUser> userList = new ArrayList<ApplicationUser>();
+                    ArrayList<ApplicationUser> userList = new ArrayList<>();
                     while(st.hasMoreTokens()) {
                         String username = st.nextToken();
                         if(username.indexOf('(')>0) {
@@ -497,7 +497,7 @@ public class WorkflowUtils {
                         (cfType instanceof MultipleCustomFieldType)) {
                     // format already correct
                 } else if (cfType instanceof  LabelsCFType) {
-                    Set<String> set = new HashSet<String>();
+                    Set<String> set = new HashSet<>();
                     for(Object o:(Collection)newValue) {
                         set.add(o.toString());
                     }
@@ -512,7 +512,7 @@ public class WorkflowUtils {
                 newValue = convertValueToUser(newValue);
             } else if (cfType instanceof LabelsCFType) {
                 if (newValue == null) {
-                    this.labelManager.setLabels(currentUser,issue.getId(),customField.getIdAsLong(),new HashSet<String>(),false,true);
+                    this.labelManager.setLabels(currentUser,issue.getId(),customField.getIdAsLong(), new HashSet<>(),false,true);
               }else{
                     Set<String> set = convertToSetForLabels(value);
                     this.labelManager.setLabels(currentUser,issue.getId(),customField.getIdAsLong(),set,false,true);
@@ -797,7 +797,7 @@ public class WorkflowUtils {
     private Set<String> convertToSetForLabels(Object newValue) {
         Set<String> set;
         if (newValue == null || (newValue instanceof Collection && ((Collection) newValue).isEmpty())) {
-            set = new HashSet<String>();
+            set = new HashSet<>();
         } else if (newValue instanceof Label) {
             set = convertToSetForLabels((Label) newValue);
         } else if (newValue instanceof Collection) {
@@ -811,7 +811,7 @@ public class WorkflowUtils {
     }
 
     private Set<String> convertToSetForLabels(String newValue) {
-        Set<String> set = new HashSet<String>();
+        Set<String> set = new HashSet<>();
         StringTokenizer st = new StringTokenizer(newValue," ");
         while(st.hasMoreTokens()) {
             set.add(st.nextToken());
@@ -820,13 +820,13 @@ public class WorkflowUtils {
     }
 
     private Set<String> convertToSetForLabels(Label newValue) {
-        Set<String> set = new HashSet<String>();
+        Set<String> set = new HashSet<>();
         set.add(newValue.getLabel());
         return set;
     }
 
     private Set<String> convertToSetForLabels(Collection col) {
-        Set<String> set = new HashSet<String>();
+        Set<String> set = new HashSet<>();
         for (Object o : col) {
             set.add(o.toString());
         }
@@ -837,7 +837,7 @@ public class WorkflowUtils {
     public String convertToString(Object value) {
         if (value instanceof Collection) {
             Collection collection = (Collection) value;
-            List<Object> resultList = new ArrayList<Object>();
+            List<Object> resultList = new ArrayList<>();
             for (Object object : collection) {
                 object = convertToString(object);
                 resultList.add(object);
@@ -883,7 +883,7 @@ public class WorkflowUtils {
         } else {
             values = Collections.singleton(value);
         }
-        Set<ProjectComponent> targetProjectComponents = new HashSet<ProjectComponent>();
+        Set<ProjectComponent> targetProjectComponents = new HashSet<>();
         for (Object val : values) {
             ProjectComponent projectComponent;
             if (val instanceof ProjectComponent) {
@@ -1027,7 +1027,7 @@ public class WorkflowUtils {
     }
 
     private <T> ArrayList<T> asArrayList(T value) {
-        ArrayList<T> list = new ArrayList<T>(1);
+        ArrayList<T> list = new ArrayList<>(1);
         list.add(value);
         return list;
     }
@@ -1073,7 +1073,7 @@ public class WorkflowUtils {
      */
     public List<Group> getGroups(String strGroups, String splitter) {
         String[] groups = strGroups.split("\\Q" + splitter + "\\E");
-        List<Group> groupList = new ArrayList<Group>(groups.length);
+        List<Group> groupList = new ArrayList<>(groups.length);
 
         for (String s : groups) {
             Group group = crowdService.getGroup(s);
@@ -1107,7 +1107,7 @@ public class WorkflowUtils {
      */
     public List<ProjectRole> getRoles(String strRoles, String splitter) {
         String[] roles = strRoles.split("\\Q" + splitter + "\\E");
-        List<ProjectRole> roleList = new ArrayList<ProjectRole>(roles.length);
+        List<ProjectRole> roleList = new ArrayList<>(roles.length);
 
         for (String s : roles) {
             roleList.add(projectRoleManager.getProjectRole(s));
@@ -1140,7 +1140,7 @@ public class WorkflowUtils {
      */
     public List<Field> getFields(String strFields, String splitter) {
         String[] fields = strFields.split("\\Q" + splitter + "\\E");
-        List<Field> fieldList = new ArrayList<Field>(fields.length);
+        List<Field> fieldList = new ArrayList<>(fields.length);
 
         for (String s : fields) {
             final Field field = fieldManager.getField(s);
