@@ -93,13 +93,13 @@
             mapDiv = jsuMapField.find(".jsuMap");
 
         var dirNames = location.split("=>");
-        if (dirNames.length == 2) {
+        if (dirNames.length === 2) {
             location = dirNames[0].trim();
             destination = dirNames[1].trim();
         }
 
         loadAndDisplayLocationOnMap(location, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
+            if (status === google.maps.GeocoderStatus.OK) {
                 jsuMapField.addClass("open");
                 var map = new google.maps.Map(mapDiv.get(0), {
                     zoom: 8,
@@ -109,7 +109,7 @@
 
                 /* did we get GPS coordinates as location, then point marker to it instead of geocoded location */
                 var coords = location.split(",");
-                if (coords.length == 2 && isNumber(coords[0]) && isNumber(coords[1])) {
+                if (coords.length === 2 && isNumber(coords[0]) && isNumber(coords[1])) {
                     var latlng = new google.maps.LatLng(coords[0], coords[1]);
                     new google.maps.Marker({
                         position: latlng,
@@ -136,7 +136,7 @@
                         travelMode: google.maps.TravelMode.DRIVING
                     };
                     directionsService.route(request, function (response, status) {
-                        if (status == google.maps.DirectionsStatus.OK) {
+                        if (status === google.maps.DirectionsStatus.OK) {
                             directionsDisplay.setDirections(response);
                         }
                     });

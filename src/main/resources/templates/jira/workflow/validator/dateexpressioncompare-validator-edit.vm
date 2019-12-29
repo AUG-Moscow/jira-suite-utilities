@@ -12,7 +12,7 @@
                 >$textutils.htmlEncode(${val.name})</option>
             #end
         </select>
-        <br><font size="1">$i18n.getText("dateexpressioncompare-validator.date.description")</font>
+        <br><span style="font-size: xx-small; ">$i18n.getText("dateexpressioncompare-validator.date.description")</span>
     </td>
 </tr>
 <tr bgcolor="#ffffff">
@@ -29,7 +29,7 @@
                 >$textutils.htmlEncode(${val.value})</option>
             #end
         </select>
-        <br><font size="1">$i18n.getText("datecompare-validator.condition.description")</font>
+        <br><span style="font-size: xx-small; ">$i18n.getText("datecompare-validator.condition.description")</span>
     </td>
 </tr>
 <tr bgcolor="#ffffff">
@@ -38,7 +38,8 @@
     </td>
     <td bgcolor="#ffffff" nowrap>
         <input type="text" id="expression" name="expression" value="$textutils.htmlEncode($!{val-expressionSelected})"/>
-        <br><font size="1">$i18n.getText("dateexpressioncompare-validator.compare.description")</font>
+        <br><span
+            style="font-size: xx-small; ">$i18n.getText("dateexpressioncompare-validator.compare.description")</span>
     </td>
 </tr>
 <tr bgcolor="#ffffff">
@@ -55,7 +56,7 @@
                 >$i18n.getText("datecompare-validator-view.${val.value}")</option>
             #end
         </select>
-        <br><font size="1">$i18n.getText("datecompare-validator.timepart.description")</font>
+        <br><span style="font-size: xx-small; ">$i18n.getText("datecompare-validator.timepart.description")</span>
     </td>
 </tr>
 <tr bgcolor="#ffffff">

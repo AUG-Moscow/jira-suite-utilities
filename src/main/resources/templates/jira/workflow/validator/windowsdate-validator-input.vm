@@ -8,7 +8,7 @@
                 <option value="${val.id}">$textutils.htmlEncode(${val.name})</option>
             #end
         </select>
-        <br><font size="1">$i18n.getText("windowsdate-validator-edit.choose_date_field")</font>
+        <br><span style="font-size: xx-small; ">$i18n.getText("windowsdate-validator-edit.choose_date_field")</span>
     </td>
 </tr>
 <tr bgcolor="#ffffff">
@@ -17,7 +17,7 @@
     </td>
     <td bgcolor="#ffffff" nowrap>
         <input type="text" id="windowsDays" name="windowsDays" value=""/>
-        <br><font size="1">$i18n.getText("windowsdate-validator-edit.day_frame.description")</font>
+        <br><span style="font-size: xx-small; ">$i18n.getText("windowsdate-validator-edit.day_frame.description")</span>
     </td>
 </tr>
 <tr bgcolor="#ffffff">
@@ -30,7 +30,8 @@
                 <option value="${val.id}">$textutils.htmlEncode(${val.name})</option>
             #end
         </select>
-        <br><font size="1">$i18n.getText("windowsdate-validator-edit.in_relation_to.description")</font>
+        <br><span
+            style="font-size: xx-small; ">$i18n.getText("windowsdate-validator-edit.in_relation_to.description")</span>
     </td>
 </tr>
 <tr>

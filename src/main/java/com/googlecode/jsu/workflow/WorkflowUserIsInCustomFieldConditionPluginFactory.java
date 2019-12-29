@@ -10,14 +10,14 @@ import com.atlassian.jira.plugin.workflow.WorkflowPluginConditionFactory;
 import com.googlecode.jsu.util.WorkflowUtils;
 import com.opensymphony.workflow.loader.AbstractDescriptor;
 import com.opensymphony.workflow.loader.ConditionDescriptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Anton Afanassiev
  */
-public class WorkflowUserIsInCustomFieldConditionPluginFactory
-        extends AbstractWorkflowPluginFactory
-        implements WorkflowPluginConditionFactory {
-
+public class WorkflowUserIsInCustomFieldConditionPluginFactory extends AbstractWorkflowPluginFactory implements WorkflowPluginConditionFactory {
+    private static final Logger LOG = LoggerFactory.getLogger(WorkflowUserIsInCustomFieldConditionPluginFactory.class);
     private static final String ALLOW_USER_IN_FIELD = "allowUserInField";
 
     private final CustomFieldManager customFieldManager;
@@ -54,6 +54,7 @@ public class WorkflowUserIsInCustomFieldConditionPluginFactory
         try {
             field = workflowUtils.getFieldFromKey(sField);
         } catch (Exception e) {
+            LOG.error("Problem with fetching field", e);
         }
 
         if (field != null) {
@@ -79,6 +80,7 @@ public class WorkflowUserIsInCustomFieldConditionPluginFactory
         try {
             field = workflowUtils.getFieldFromKey(sField);
         } catch (Exception e) {
+            LOG.error("Problem with fetching field", e);
         }
 
         if (field != null) {

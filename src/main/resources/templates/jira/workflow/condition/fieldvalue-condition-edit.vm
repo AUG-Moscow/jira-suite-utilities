@@ -16,7 +16,7 @@
                 >$textutils.htmlEncode(${val.name})</option>
             #end
         </select>
-        <br><font size="1">$i18n.getText("fieldvalue-condition-edit.field.description")</font>
+        <br><span style="font-size: xx-small; ">$i18n.getText("fieldvalue-condition-edit.field.description")</span>
     </td>
 </tr>
 
@@ -32,7 +32,7 @@
                 >$textutils.htmlEncode(${val.value})</option>
             #end
         </select>
-        <br><font size="1">$i18n.getText("fieldvalue-condition-edit.condition.description")</font>
+        <br><span style="font-size: xx-small; ">$i18n.getText("fieldvalue-condition-edit.condition.description")</span>
     </td>
 </tr>
 
@@ -42,7 +42,7 @@
     </td>
     <td bgcolor="#ffffff" nowrap>
         <input type="text" id="fieldValue" name="fieldValue" value="$textutils.htmlEncode($!{val-fieldValue})"/>
-        <br><font size="1">$i18n.getText("fieldvalue-condition-edit.value.description")</font>
+        <br><span style="font-size: xx-small; ">$i18n.getText("fieldvalue-condition-edit.value.description")</span>
     </td>
 </tr>
 
@@ -58,7 +58,7 @@
                 >$i18n.getText(${val.valueKey})</option>
             #end
         </select>
-        <br><font size="1">$i18n.getText("fieldvalue-condition-edit.comparison.description")</font>
+        <br><span style="font-size: xx-small; ">$i18n.getText("fieldvalue-condition-edit.comparison.description")</span>
     </td>
 </tr>
 

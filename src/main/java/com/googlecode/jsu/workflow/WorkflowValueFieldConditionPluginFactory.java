@@ -14,6 +14,8 @@ import com.googlecode.jsu.util.FieldCollectionsUtils;
 import com.googlecode.jsu.util.WorkflowUtils;
 import com.opensymphony.workflow.loader.AbstractDescriptor;
 import com.opensymphony.workflow.loader.ConditionDescriptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Gustavo Martin.
@@ -21,9 +23,8 @@ import com.opensymphony.workflow.loader.ConditionDescriptor;
  * This class defines the parameters available for Value Field Condition.
  *
  */
-public class WorkflowValueFieldConditionPluginFactory extends
-        AbstractWorkflowPluginFactory implements WorkflowPluginConditionFactory {
-
+public class WorkflowValueFieldConditionPluginFactory extends AbstractWorkflowPluginFactory implements WorkflowPluginConditionFactory {
+    private final Logger LOG = LoggerFactory.getLogger(WorkflowUserIsInCustomFieldConditionPluginFactory.class);
     private final ConditionCheckerFactory conditionCheckerFactory;
     private final FieldCollectionsUtils fieldCollectionsUtils;
     private final WorkflowUtils workflowUtils;
@@ -73,6 +74,7 @@ public class WorkflowValueFieldConditionPluginFactory extends
         try {
             field = workflowUtils.getFieldFromKey(sField);
         } catch (Exception e) {
+            LOG.error("Problem with fetching field", e);
         }
 
         if (field != null) {
@@ -103,6 +105,7 @@ public class WorkflowValueFieldConditionPluginFactory extends
         try {
             field = workflowUtils.getFieldFromKey(sField);
         } catch (Exception e) {
+            LOG.error("Problem with fetching field", e);
         }
 
         if (field != null) {

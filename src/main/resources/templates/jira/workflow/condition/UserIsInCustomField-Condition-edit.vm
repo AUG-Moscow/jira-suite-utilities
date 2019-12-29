@@ -11,7 +11,8 @@
                 #if(!$!{allowUserInField-selected}) selected #end
             >$i18n.getText("userisincustomfield-condition-edit.not_in_field.label")</option>
         </select>
-        <br><font size="1">$i18n.getText("userisincustomfield-condition-edit.user.description")</font>
+        <br><span
+            style="font-size: xx-small; ">$i18n.getText("userisincustomfield-condition-edit.user.description")</span>
     </td>
 </tr>
 <tr bgcolor="#ffffff">
@@ -26,7 +27,8 @@
                 >$textutils.htmlEncode(${val.name})</option>
             #end
         </select>
-        <br><font size="1">$i18n.getText("userisincustomfield-condition-edit.field.description")</font>
+        <br><span
+            style="font-size: xx-small; ">$i18n.getText("userisincustomfield-condition-edit.field.description")</span>
     </td>
 </tr>
 

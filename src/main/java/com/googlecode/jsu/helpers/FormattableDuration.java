@@ -12,7 +12,7 @@ public class FormattableDuration {
     }
 
     public FormattableDuration(final String text) {
-        if(text!=null) {
+        if (text != null) {
             millis = Long.parseLong(text);
         } else {
             millis = 0;
@@ -33,27 +33,24 @@ public class FormattableDuration {
     public static String getFormatted(long duration) {
         String retVal;
 
-        if(duration!=0){
+        if (duration != 0) {
             Long days = duration / 86400000;
-            Long restDay = duration % 86400000;
-
+            long restDay = duration % 86400000;
             Long hours = restDay / 3600000;
-            Long resthours = restDay % 3600000;
-
+            long resthours = restDay % 3600000;
             Long minutes = resthours / 60000;
-            Long restMinutes = resthours % 60000;
-
+            long restMinutes = resthours % 60000;
             Long seconds = restMinutes / 1000;
 
             // If it has been days, it does not have sense to show the seconds.
-            retVal = days.equals(new Long("0"))?"":String.valueOf(days) + "d ";
-            retVal = retVal + (hours.equals(new Long("0"))?"":String.valueOf(hours) + "h ");
-            retVal = retVal + (minutes.equals(new Long("0"))?"":String.valueOf(minutes) + "m ");
-            if((days.equals(new Long("0"))) && (hours.equals(new Long("0")))){
-                retVal = retVal + (seconds.equals(new Long("0"))?"":String.valueOf(seconds) + "s");
+            retVal = days.equals(new Long("0")) ? "" : days + "d ";
+            retVal = retVal + (hours.equals(new Long("0")) ? "" : hours + "h ");
+            retVal = retVal + (minutes.equals(new Long("0")) ? "" : minutes + "m ");
+            if ((days.equals(new Long("0"))) && (hours.equals(new Long("0")))) {
+                retVal = retVal + (seconds.equals(new Long("0")) ? "" : seconds + "s");
             }
 
-        }else{
+        } else {
             retVal = "0s";
         }
 
@@ -72,9 +69,7 @@ public class FormattableDuration {
 
         FormattableDuration that = (FormattableDuration) o;
 
-        if (millis != that.millis) return false;
-
-        return true;
+        return millis == that.millis;
     }
 
     @Override

@@ -2,14 +2,14 @@
     <!--
     var fields = new Array(${fields.size()});
         #foreach ($field in ${fields})
-        fields[${velocityCount} -1] = '$field.id';
+            fields[${velocityCount} -1] = '$field.id';
         #end
 
     function retoreFieldValue() {
         var selectedValue = document.getElementById("updateFieldId").value;
 
         for (i = 0; i < fields.length; i++) {
-            if (fields[i] == selectedValue) {
+            if (fields[i] === selectedValue) {
                 document.getElementById(fields[i] + "_container").style.display = '';
                 if (document.getElementById(fields[i]) == null) alert(fields[i]);
                 document.getElementById(fields[i]).name = 'fieldValue';

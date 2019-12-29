@@ -88,8 +88,6 @@ import org.ofbiz.core.entity.GenericValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//import com.opensymphony.user.Entity;
-
 /**
  * @author Gustavo Martin.
  *
@@ -322,7 +320,7 @@ public class WorkflowUtils {
                         // Not implemented, yet.
                         break;
                     case IssueFieldConstants.ISSUE_TYPE:
-                        retVal = issue.getIssueTypeObject();
+                        retVal = issue.getIssueType();
                         break;
                     case IssueFieldConstants.TIMETRACKING:
                         // Not implemented, yet.
@@ -344,13 +342,13 @@ public class WorkflowUtils {
                         }
                         break;
                     case IssueFieldConstants.PRIORITY:
-                        retVal = issue.getPriorityObject();
+                        retVal = issue.getPriority();
                         break;
                     case IssueFieldConstants.RESOLUTION:
-                        retVal = issue.getResolutionObject();
+                        retVal = issue.getResolution();
                         break;
                     case IssueFieldConstants.STATUS:
-                        retVal = issue.getStatusObject();
+                        retVal = issue.getStatus();
                         break;
                     case IssueFieldConstants.PROJECT:
                         retVal = issue.getProjectObject();
