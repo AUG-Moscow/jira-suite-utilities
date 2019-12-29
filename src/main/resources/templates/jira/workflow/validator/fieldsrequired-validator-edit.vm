@@ -64,7 +64,6 @@
         </div>
     </td>
 </tr>
-</tr>
 
 <script type="text/javascript">
     function transfer(srcList, destList) {

@@ -37,7 +37,7 @@
                     <tr>
                         #statusWithIcon ($tran.fromStatus)
                         <td align="center" nowrap="nowrap" width=6% valign=top>
-                            <img src="${req.getContextPath()}/images/icons/arrow_right_small.gif" align="absmiddle"
+                            <img src="${req.getContextPath()}/images/icons/arrow_right_small.gif" align="absmiddle" alt="Status transitions"
                                  border="0" height="16" width="16"/>
                         </td>
                         #statusWithIcon ($tran.toStatus)

@@ -1,4 +1,4 @@
-<html>
+<html lang="html">
 <head>
     <title>${i18n.getText("configuration.title")}</title>
     <meta name="decorator" content="atl.admin"/>
